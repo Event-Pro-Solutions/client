@@ -19,10 +19,7 @@ jobs:
     name: Test Build
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: []
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
 
     steps:
       - uses: actions/checkout@v3
