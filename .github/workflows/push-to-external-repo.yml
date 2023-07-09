@@ -14,6 +14,6 @@ jobs:
         with:
           deploy_key: ${{ secrets.SSH_DEPLOY_KEY }}
           publish_dir: .
-          external_repository: DLMedeiro/event-pro-live
+          external_repository: Event-Pro/event-pro-frontend
           publish_branch: main
           allow_empty_commit: true
