@@ -4,7 +4,7 @@
 name: Build for production
 
 on:
-  push:
+  pull_request:
     branches: ["main"]
 
 jobs:
