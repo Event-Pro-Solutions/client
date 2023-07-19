@@ -1,5 +1,5 @@
-import { CarouselComponent } from "@/components/CarouselComponent";
 import React, { memo } from "react";
+import { CarouselComponent } from "@/components/CarouselComponent";
 
 const MobileLanding = memo(() => {
   return (
@@ -10,6 +10,8 @@ const MobileLanding = memo(() => {
     </div>
   );
 });
+
+MobileLanding.displayName = "MobileLanding";
 
 // export const MemoizedMobileLanding = React.memo(MobileLanding);
 export default MobileLanding;
