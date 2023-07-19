@@ -12,3 +12,10 @@
 // User Signed In:
 // *Starting with the assumption all users are organizers and can create events
 // - Profile, SignOut, CreateEvent
+import React from 'react'
+
+function Navigation() {
+  return <div>Navigation</div>
+}
+
+export default Navigation

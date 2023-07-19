@@ -13,3 +13,10 @@
 // Lists out all events:
 // - Show "EventCard" for each event created by mapping over all events in system. (Event cards display a portion of the event details)
 // - OnClick Redirect to EventDetailPage based on event tag
+import React from 'react'
+
+function LandingPage() {
+  return <div>LandingPage</div>
+}
+
+export default LandingPage
