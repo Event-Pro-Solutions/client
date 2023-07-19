@@ -1,31 +1,36 @@
 import React from "react";
 import { Carousel, initTE } from "tw-elements";
+import colorRun from "../utils/images/colorRun.webp";
+import concert from "../utils/images/concert.webp";
+import park from "../utils/images/park.webp";
+import rangersBaseball from "../utils/images/rangersBaseball.webp";
+import soccer from "../utils/images/soccer.webp";
 
 const resources = [
   {
     title: "Find me on Mastodon",
     link: "https://indieweb.social/@kendalmintcode",
-    url: require("../../utils/images/Texas Rangers Image.jpg"),
+    url: colorRun,
   },
   {
     title: "Find me on Mastodon",
     link: "https://indieweb.social/@kendalmintcode",
-    url: require("../../utils/images/Color Run Image.jpg"),
+    url: concert,
   },
   {
     title: "Find me on Mastodon",
     link: "https://indieweb.social/@kendalmintcode",
-    url: require("../../utils/images/concert.webp"),
+    url: park,
   },
   {
     title: "Find me on Mastodon",
     link: "https://indieweb.social/@kendalmintcode",
-    url: require("../../utils/images/park.webp"),
+    url: rangersBaseball,
   },
   {
     title: "Find me on Mastodon",
     link: "https://indieweb.social/@kendalmintcode",
-    url: require("../../utils/images/soccer.webp"),
+    url: soccer,
   },
 ];
 
