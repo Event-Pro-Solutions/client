@@ -3,7 +3,7 @@ import { Carousel, initTE } from "tw-elements";
 import colorRun from "../utils/images/colorRun.webp";
 import concert from "../utils/images/concert.webp";
 import park from "../utils/images/park.webp";
-import rangersBaseball from "../utils/images/rangersBaseball.webp";
+import baseball from "../utils/images/baseball.webp";
 import soccer from "../utils/images/soccer.webp";
 
 const resources = [
@@ -25,7 +25,7 @@ const resources = [
   {
     title: "Find me on Mastodon",
     link: "https://indieweb.social/@kendalmintcode",
-    url: rangersBaseball,
+    url: baseball,
   },
   {
     title: "Find me on Mastodon",
