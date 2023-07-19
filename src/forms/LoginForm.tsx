@@ -3,4 +3,4 @@
 // Functionality:
 // - Organizer Inputs (update as needed): Email, Password
 // - Welcome Modal on submission
-// - Redirect to OrganizerProfile on completion
+// - Redirect to Profile on completion
