@@ -53,19 +53,51 @@ export default function CreateCustomerAccountForm() {
     // alert(`Is this your full name: ${result.data}`)
   }
   return (
-    <>
+    <div className="w-full max-w-xs">
       <h1>Create Organizer Page</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="userName">Username</label>
-        <input type="text" id="userName" name="userName" required />
+      <form
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        onSubmit={handleSubmit}
+      >
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="userName"
+        >
+          Username
+        </label>
+        <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="username"
+          type="text"
+          name="userName"
+          required
+        />
 
-        <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="email" required />
-        <button type="submit">Login</button>
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="password"
+        >
+          Password
+        </label>
+        <input
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          type="password"
+          id="password"
+          name="password"
+          required
+        />
+        <div className="flex items-center justify-between">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Login
+          </button>
+        </div>
       </form>
       <h2>
         <Link href="/">← Back to home</Link>
       </h2>
-    </>
+    </div>
   )
 }

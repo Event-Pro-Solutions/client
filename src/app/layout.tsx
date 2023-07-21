@@ -1,4 +1,4 @@
-// import './globals.css'
+import './globals.css'
 import { Inter, Tenali_Ramakrishna, Ubuntu_Condensed } from 'next/font/google'
 
 const inter = Inter({

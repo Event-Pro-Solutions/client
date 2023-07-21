@@ -54,20 +54,73 @@ export default function CreateOrganizerAccountForm() {
     // alert(`Is this your full name: ${result.data}`)
   }
   return (
-    <>
+    <div className="w-full max-w-xs">
       <h1>Create Organizer Page</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="organizerName">Organizer Name</label>
-        <input type="text" id="organizerName" name="organizerName" required />
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" required />
-        <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="email" required />
-        <button type="submit">Create Account</button>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      >
+        <div className="mb-4">
+          <label
+            htmlFor="organizerName"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+            Organizer Name
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="organizerName"
+            type="text"
+            placeholder="organizerName"
+            name="organizerName"
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="email"
+          >
+            Email
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="email"
+            type="email"
+            id="email"
+            name="email"
+            required
+          />
+        </div>
+
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="password"
+          >
+            Password
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="******************"
+            type="password"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+        <div className="flex items-center justify-between">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Create Account
+          </button>
+        </div>
       </form>
       <h2>
         <Link href="/">← Back to home</Link>
       </h2>
-    </>
+    </div>
   )
 }
