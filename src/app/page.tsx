@@ -1,4 +1,4 @@
-import MobileLanding from '../mobile/pages/MobileLanding'
+import MobileLanding from '../components/mobile/MobileLanding'
 import Link from 'next/link'
 
 export default function Home() {
@@ -6,13 +6,13 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <MobileLanding />
       <h2 className="title">
-        <Link href="/auth/login">Login</Link>
+        <Link href="/user/login">Login</Link>
       </h2>
       <h2 className="title">
-        <Link href="/auth/create-customer">Create Customer</Link>
+        <Link href="/user/create-customer">Create Customer</Link>
       </h2>
       <h2 className="title">
-        <Link href="/auth/create-organizer">Create Organizer</Link>
+        <Link href="/user/create-organizer">Create Organizer</Link>
       </h2>
       <h2 className="title">
         <Link href="/user/profile">Profile</Link>

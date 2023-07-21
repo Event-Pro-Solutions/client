@@ -10,7 +10,7 @@ import Link from 'next/link'
 function LoginForm() {
   return (
     <>
-      <h1>LoginForm</h1>
+      <h1>Login Page</h1>
 
       <h2>
         <Link href="/">← Back to home</Link>
