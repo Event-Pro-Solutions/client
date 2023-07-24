@@ -1,6 +1,6 @@
 "use client";
 import React, { memo } from "react";
-import { CarouselComponent } from "@/components/CarouselComponent";
+// import { CarouselComponent } from "@/components/CarouselComponent";
 import ticketLogo from "../../utils/images/ticketLogoLight.png";
 import presentation from "../../utils/images/presentation.webp";
 
