@@ -122,7 +122,7 @@ const DesktopLanding = memo(() => {
                 {" "}
                 <p className="text-muted drop-shadow-text-lg mb-10 bg-primary rounded place-items-center p-2">
                   Unlock the door to stress-free event planning today with our
-                  powerful and intuitive app! Don't delay and experience the
+                  powerful and intuitive app! Do not delay and experience the
                   ease of organizing memorable events, saving time, and ensuring
                   nothing is left to chance.
                 </p>
