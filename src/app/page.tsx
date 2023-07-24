@@ -1,4 +1,4 @@
-import MobileLanding from '../components/mobile/mobileLandingPage'
+import MobileLanding from '../components/mobile/MobileLanding'
 import Link from 'next/link'
 
 export default function Home() {

@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-import { CarouselComponent } from '../carouselComponent'
+import { CarouselComponent } from '../CarouselComponent'
 
 const MobileLanding = memo(() => {
   return (
