@@ -1,6 +1,5 @@
 "use client";
 import React, { memo } from "react";
-// import { CarouselComponent } from "@/components/CarouselComponent";
 import ticketLogo from "../../utils/images/ticketLogoLight.png";
 import presentation from "../../utils/images/presentation.webp";
 
@@ -64,7 +63,7 @@ const DesktopLanding = memo(() => {
 
           <main className="relative grid place-items-center overflow-hidden w-full">
             <div className="w-full flex justify-center m-auto">
-              {/* <CarouselComponent /> */}
+              Carousel Placeholder
             </div>
 
             <div className="mt-32 w-full">
