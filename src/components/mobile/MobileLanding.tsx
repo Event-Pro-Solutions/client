@@ -1,13 +1,13 @@
 import React, { memo } from 'react'
 
-// import { CarouselComponent } from '../../components/carouselComponent'
+import { CarouselComponent } from '../../components/carouselComponent'
 
 const MobileLanding = memo(() => {
   return (
     <div>
       <div>Navbar Placeholder</div>
       <div>Search Bar Placeholder</div>
-      {/* <CarouselComponent /> */}
+      <CarouselComponent />
     </div>
   )
 })
