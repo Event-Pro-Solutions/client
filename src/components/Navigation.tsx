@@ -36,7 +36,7 @@ const Navigation = () => {
           </a>
         </li>
         <li className="mr-6">
-          <a className={navLink} href="/create-organizer">
+          <a className={navLink} href="/user/create-organizer">
             Create Organizer Account
           </a>
         </li>
