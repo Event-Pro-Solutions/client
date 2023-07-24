@@ -43,7 +43,11 @@ export default function RootLayout({
           href="../../utils/images/ticketLogoLight.png"
         />
       </head>
-      <body className={classNames}>{children}</body>
+
+      <body className={classNames}>
+        {' '}
+        <Navigation /> {children}
+      </body>
     </html>
   )
 }
