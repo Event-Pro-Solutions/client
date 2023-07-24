@@ -1,5 +1,4 @@
 import React, { memo } from "react";
-import { CarouselComponent } from "@/components/CarouselComponent";
 import Image from "next/image";
 import Link from "next/link";
 
