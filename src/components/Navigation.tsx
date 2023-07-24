@@ -16,9 +16,9 @@ import React from 'react'
 
 const Navigation = () => {
   const navLink =
-    'text-dark  border-b-4 border-transparent hover:border-secondary '
+    'text-dark  border-b-4 border-transparent hover:border-secondary py-2'
   return (
-    <div className="flex items-center justify-center bg-primary py-6">
+    <div className="sticky top-0 flex items-center justify-center bg-primary py-6">
       <ul className="flex">
         <li className="mr-6">
           <a className={navLink} href="/">
