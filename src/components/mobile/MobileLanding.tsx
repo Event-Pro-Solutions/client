@@ -1,17 +1,18 @@
-import React, { memo } from "react";
-import { CarouselComponent } from "@/components/CarouselComponent";
+import React, { memo } from 'react'
+
+// import { CarouselComponent } from '../../components/carouselComponent'
 
 const MobileLanding = memo(() => {
   return (
     <div>
       <div>Navbar Placeholder</div>
       <div>Search Bar Placeholder</div>
-      <CarouselComponent />
+      {/* <CarouselComponent /> */}
     </div>
-  );
-});
+  )
+})
 
-MobileLanding.displayName = "MobileLanding";
+MobileLanding.displayName = 'MobileLanding'
 
 // export const MemoizedMobileLanding = React.memo(MobileLanding);
-export default MobileLanding;
+export default MobileLanding

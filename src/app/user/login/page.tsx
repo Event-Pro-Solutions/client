@@ -8,6 +8,8 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import ticket from '../../../utils/images/ticket.jpg'
 
 export default function CreateCustomerAccountForm() {
   const router = useRouter()
@@ -53,51 +55,70 @@ export default function CreateCustomerAccountForm() {
     // alert(`Is this your full name: ${result.data}`)
   }
   return (
-    <div className="w-full max-w-xs">
-      <h1>Create Organizer Page</h1>
-      <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        onSubmit={handleSubmit}
-      >
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="userName"
-        >
-          Username
-        </label>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="username"
-          type="text"
-          name="userName"
-          required
-        />
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
+      <div className="bg-white max-w-md w-full space-y-8 text-dark shadow-md rounded border-solid border-2 border-primary">
+        <div>
+          <Image
+            className="mx-auto h-12 w-auto mt-4"
+            src={ticket}
+            alt="ticket logo"
+          ></Image>
 
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="password"
-        >
-          Password
-        </label>
-        <input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="password"
-          id="password"
-          name="password"
-          required
-        />
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Login
-          </button>
+          <h2 className="mt-6 text-center text-3xl font-extrabold">
+            EventPro Login
+          </h2>
         </div>
-      </form>
-      <h2>
-        <Link href="/">← Back to home</Link>
-      </h2>
+        <div className="max-w-md w-full space-y-8">
+          <form
+            className=" shadow-md rounded px-8 pt-6 pb-8"
+            onSubmit={handleSubmit}
+          >
+            <div className="mb-4">
+              <label
+                className="block text-dark text-sm font-bold mb-2"
+                htmlFor="userName"
+              >
+                Username
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                id="username"
+                placeholder="Username"
+                type="text"
+                name="userName"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-dark text-sm font-bold mb-2"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                placeholder="******"
+                type="password"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <div className="flex items-center justify-between">
+              <button
+                className="bg-dark hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-auto"
+                type="submit"
+              >
+                Login
+              </button>
+            </div>
+            <div>
+              <Link href="/">← Back to home</Link>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   )
 }

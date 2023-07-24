@@ -9,6 +9,8 @@
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import ticket from '../../../utils/images/ticket.jpg'
 
 export default function CreateCustomerAccountForm() {
   const router = useRouter()
@@ -57,108 +59,122 @@ export default function CreateCustomerAccountForm() {
     // alert(`Is this your full name: ${result.data}`)
   }
   return (
-    <div className="w-full max-w-xs">
-      <h1>Create Organizer Page</h1>
-      <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        onSubmit={handleSubmit}
-      >
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="firstName"
-          >
-            First Name
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="firstName"
-            type="text"
-            id="firstName"
-            name="firstName"
-            required
-          />
-        </div>
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
+      <div className="bg-white max-w-md w-full space-y-8 text-dark border-solid border-2 border-primary">
+        <div>
+          <Image
+            className="mx-auto h-12 w-auto mt-4"
+            src={ticket}
+            alt="ticket logo"
+          ></Image>
 
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="lastName"
-          >
-            Last Name
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="lastName"
-            type="text"
-            name="lastName"
-            required
-            id="lastName"
-          />
+          <h2 className="mt-6 mx-4 text-center text-3xl font-extrabold">
+            Create your EventPro Account
+          </h2>
         </div>
+        <div className="max-w-md w-full space-y-8">
+          <form
+            className="shadow-md rounded px-8 pt-6 pb-8"
+            onSubmit={handleSubmit}
+          >
+            <div className="mb-4">
+              <label
+                className="block text-dark text-sm font-bold mb-2"
+                htmlFor="firstName"
+              >
+                First Name
+              </label>
+              <input
+                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                placeholder="First Name"
+                type="text"
+                id="firstName"
+                name="firstName"
+                required
+              />
+            </div>
 
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
-            Email
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="email"
-            name="email"
-            required
-            type="email"
-            id="email"
-          />
-        </div>
+            <div className="mb-4">
+              <label
+                className="block text-dark text-sm font-bold mb-2"
+                htmlFor="lastName"
+              >
+                Last Name
+              </label>
+              <input
+                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                placeholder="Last Name"
+                type="text"
+                name="lastName"
+                required
+                id="lastName"
+              />
+            </div>
 
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="username"
-          >
-            Username
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Username"
-            type="text"
-            id="username"
-            name="username"
-            required
-          />
-        </div>
+            <div className="mb-4">
+              <label
+                className="block text-dark text-sm font-bold mb-2"
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <input
+                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                placeholder="Email"
+                name="email"
+                required
+                type="email"
+                id="email"
+              />
+            </div>
 
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            Password
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Username"
-            type="password"
-            id="password"
-            name="password"
-            required
-          />
+            <div className="mb-4">
+              <label
+                className="block text-dark text-sm font-bold mb-2"
+                htmlFor="username"
+              >
+                Username
+              </label>
+              <input
+                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                placeholder="Username"
+                type="text"
+                id="username"
+                name="username"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label
+                className="block text-dark text-sm font-bold mb-2"
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                placeholder="******"
+                type="password"
+                id="password"
+                name="password"
+                required
+              />
+            </div>
+            <div className="flex items-center justify-between">
+              <button
+                className="bg-dark hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-auto"
+                type="submit"
+              >
+                Create Account
+              </button>
+            </div>
+            <div>
+              <Link href="/">← Back to home</Link>
+            </div>
+          </form>
         </div>
-        <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Create Account
-          </button>
-        </div>
-      </form>
-      <h2>
-        <Link href="/">← Back to home</Link>
-      </h2>
+      </div>
     </div>
   )
 }
