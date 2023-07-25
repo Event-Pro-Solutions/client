@@ -4,17 +4,13 @@
 // - Organizer Inputs (update as needed): Email, Password
 // - Welcome Modal on submission
 // - Redirect to Profile on completion
-"use client";
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ticket from "../../../utils/images/ticket.jpg";
-import { useViewport } from "@/hook/useViewport";
 
 export default function CreateCustomerAccountForm() {
-  const { width } = useViewport();
-
   const router = useRouter();
   // Handles the submit event on form submit.
   const handleSubmit = async (event: any) => {
@@ -58,7 +54,6 @@ export default function CreateCustomerAccountForm() {
     // alert(`Is this your full name: ${result.data}`)
   };
 
-  console.log(width);
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
       <div className="bg-white max-w-md w-full space-y-8 text-dark shadow-md rounded border-solid border-2 border-primary">

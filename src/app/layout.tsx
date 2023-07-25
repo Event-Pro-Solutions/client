@@ -38,9 +38,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={classNames}>
-        <ViewportProvider>
-          <Navigation /> {children}
-        </ViewportProvider>
+        <Navigation />
+        <ViewportProvider>{children}</ViewportProvider>
       </body>
     </html>
   );
