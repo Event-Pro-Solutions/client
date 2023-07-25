@@ -8,16 +8,19 @@
 // - Display EventCards for registered events
 import React from "react";
 import Link from "next/link";
+import { ViewportProvider } from "@/hook/useViewport";
 
 function ProfilePage() {
   return (
-    <>
-      <h1>ProfilePage</h1>
+    <ViewportProvider>
+      <>
+        <h1>ProfilePage</h1>
 
-      <h2>
-        <Link href="/">← Back to home</Link>
-      </h2>
-    </>
+        <h2>
+          <Link href="/">← Back to home</Link>
+        </h2>
+      </>
+    </ViewportProvider>
   );
 }
 

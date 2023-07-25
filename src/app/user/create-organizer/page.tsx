@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ticket from "../../../utils/images/ticket.jpg";
+import { ViewportProvider } from "@/hook/useViewport";
 
 export default function CreateOrganizerAccountForm() {
   const router = useRouter();
@@ -55,87 +56,89 @@ export default function CreateOrganizerAccountForm() {
     // alert(`Is this your full name: ${result.data}`)
   };
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
-      <div className="bg-white  max-w-md w-full space-y-8 text-dark border-solid border-2 border-primary ">
-        <div>
-          <Image
-            className="mx-auto h-12 w-auto mt-4"
-            src={ticket}
-            alt="ticket logo"
-          ></Image>
+    <ViewportProvider>
+      <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
+        <div className="bg-white  max-w-md w-full space-y-8 text-dark border-solid border-2 border-primary ">
+          <div>
+            <Image
+              className="mx-auto h-12 w-auto mt-4"
+              src={ticket}
+              alt="ticket logo"
+            ></Image>
 
-          <h2 className="mt-6 text-center text-3xl font-extrabold">
-            Create your EventPro Organizer Account
-          </h2>
-        </div>
-        <div className="max-w-md w-full space-y-8">
-          <form
-            onSubmit={handleSubmit}
-            className=" shadow-md rounded px-8 pt-6 pb-8  "
-          >
-            <div className="mb-4">
-              <label
-                htmlFor="organizerName"
-                className="block text-dark text-sm font-bold mb-2"
-              >
-                Organizer Name
-              </label>
-              <input
-                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
-                id="organizerName"
-                type="text"
-                placeholder="Organizer Name"
-                name="organizerName"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-dark text-sm font-bold mb-2"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
-                placeholder="Email"
-                type="email"
-                id="email"
-                name="email"
-                required
-              />
-            </div>
+            <h2 className="mt-6 text-center text-3xl font-extrabold">
+              Create your EventPro Organizer Account
+            </h2>
+          </div>
+          <div className="max-w-md w-full space-y-8">
+            <form
+              onSubmit={handleSubmit}
+              className=" shadow-md rounded px-8 pt-6 pb-8  "
+            >
+              <div className="mb-4">
+                <label
+                  htmlFor="organizerName"
+                  className="block text-dark text-sm font-bold mb-2"
+                >
+                  Organizer Name
+                </label>
+                <input
+                  className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                  id="organizerName"
+                  type="text"
+                  placeholder="Organizer Name"
+                  name="organizerName"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-dark text-sm font-bold mb-2"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                  placeholder="Email"
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                />
+              </div>
 
-            <div className="mb-4">
-              <label
-                className="block text-dark text-sm font-bold mb-2"
-                htmlFor="password"
-              >
-                Password
-              </label>
-              <input
-                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
-                placeholder="******"
-                type="password"
-                id="password"
-                name="password"
-                required
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                className="bg-dark hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-auto"
-                type="submit"
-              >
-                Create Account
-              </button>
-            </div>
-            <div>
-              <Link href="/">← Back to home</Link>
-            </div>
-          </form>
+              <div className="mb-4">
+                <label
+                  className="block text-dark text-sm font-bold mb-2"
+                  htmlFor="password"
+                >
+                  Password
+                </label>
+                <input
+                  className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                  placeholder="******"
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                />
+              </div>
+              <div className="flex items-center justify-between">
+                <button
+                  className="bg-dark hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-auto"
+                  type="submit"
+                >
+                  Create Account
+                </button>
+              </div>
+              <div>
+                <Link href="/">← Back to home</Link>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </ViewportProvider>
   );
 }
