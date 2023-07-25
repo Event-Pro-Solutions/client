@@ -4,7 +4,6 @@ import { Inter, Tenali_Ramakrishna, Ubuntu_Condensed } from "next/font/google";
 import Navigation from "@/components/Navigation";
 
 import ticketLogo from "../utils/images/ticketLogoLight.png";
-import { ViewportProvider } from "@/hook/useViewport";
 
 const inter = Inter({
   weight: "700",
@@ -39,7 +38,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={classNames}>
         <Navigation />
-        <ViewportProvider>{children}</ViewportProvider>
+        {children}
       </body>
     </html>
   );

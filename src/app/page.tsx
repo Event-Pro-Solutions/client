@@ -9,8 +9,10 @@ export default function Home() {
   const breakpoint = 600;
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-0 selection:bg-accent selection:text-neutral">
-      {width < breakpoint ? <MobileLanding /> : <DesktopLanding />}
-    </main>
+    <ViewportProvider>
+      <main className="flex min-h-screen flex-col items-center justify-between p-0 selection:bg-accent selection:text-neutral">
+        {width < breakpoint ? <MobileLanding /> : <DesktopLanding />}
+      </main>
+    </ViewportProvider>
   );
 }

@@ -5,15 +5,10 @@
 // - Option to delete event
 // - EventUpdated Modal on submission
 // - Redirect to Profile on completion
-import { ViewportProvider } from "@/hook/useViewport";
 import React from "react";
 
 function EditEventForm() {
-  return (
-    <ViewportProvider>
-      <div>EditEventForm</div>;
-    </ViewportProvider>
-  );
+  return <div>EditEventForm</div>;
 }
 
 export default EditEventForm;
