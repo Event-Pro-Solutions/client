@@ -2,10 +2,13 @@
 
 // Functionality:
 // - Populated with event cards through a event/${eventTag} route
-import React from 'react'
+import React from "react";
+import { useViewport } from "@/hook/useViewport";
 
 function CategoryEventPage() {
-  return <div>CategoryEventPage</div>
+  const { width } = useViewport();
+
+  return <div>CategoryEventPage</div>;
 }
 
-export default CategoryEventPage
+export default CategoryEventPage;
