@@ -5,12 +5,13 @@
 // - Option to delete event
 // - EventUpdated Modal on submission
 // - Redirect to Profile on completion
+"use client";
 import React from "react";
 import { useViewport } from "@/hook/useViewport";
 
 function EditEventForm() {
   const { width } = useViewport();
-
+  console.log(width);
   return <div>EditEventForm</div>;
 }
 
