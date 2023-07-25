@@ -37,12 +37,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ViewportProvider>
-        <body className={classNames}>
-          {" "}
+      <body className={classNames}>
+        <ViewportProvider>
           <Navigation /> {children}
-        </body>
-      </ViewportProvider>
+        </ViewportProvider>
+      </body>
     </html>
   );
 }
