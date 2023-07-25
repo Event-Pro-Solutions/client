@@ -11,7 +11,8 @@ export default function Home() {
   return (
     <ViewportProvider>
       <main className="flex min-h-screen flex-col items-center justify-between p-0 selection:bg-accent selection:text-neutral">
-        {width < breakpoint ? <MobileLanding /> : <DesktopLanding />}
+        {/* {width < breakpoint ? <MobileLanding /> : <DesktopLanding />} */}
+        <MainLanding />
       </main>
     </ViewportProvider>
   );
