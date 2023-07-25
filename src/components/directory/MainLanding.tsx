@@ -11,4 +11,5 @@ const MainLanding = memo(() => {
   return width < breakpoint ? <MobileLanding /> : <DesktopLanding />;
 });
 
+MainLanding.displayName = "MainLanding";
 export default MainLanding;
