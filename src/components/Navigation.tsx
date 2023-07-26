@@ -23,6 +23,8 @@ const Navigation = () => {
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const [mobileMenu, setMobileMenu] = useState(false)
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const [eventMenu, setEventMenu] = useState(false)
+  const eventMenuRef = useRef<HTMLDivElement>(null);
   // Placehoder for user - Update image when completed
   const [user, setUser] = useState(true)
 
@@ -46,6 +48,13 @@ const showMobileMenu = () => {
     setProfileMenu(false)
   } else {
     setMobileMenu(false)
+  }
+}
+const showEventMenu = () => {
+  if(!eventMenu){
+    setEventMenu(true)
+  } else {
+    setEventMenu(false)
   }
 }
 
@@ -79,6 +88,21 @@ useEffect(() => {
   };
 }, [mobileMenu]);
 
+useEffect(() => {
+  function handleOutsideClick(event: MouseEvent) {
+
+      if (eventMenuRef.current && !eventMenuRef.current.contains(event.target as Node)) {
+        setEventMenu(false);
+      }
+    }
+
+  document.addEventListener('click', handleOutsideClick);
+
+  return () => {
+    document.removeEventListener('click', handleOutsideClick);
+  };
+}, [eventMenu]);
+
 
   return (
     <nav className="bg-dark">
@@ -88,7 +112,7 @@ useEffect(() => {
             {/* <!-- Mobile menu button--> */}
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className={mobileMenu ? ("inline-flex items-center justify-center rounded-md p-2 text-primary hover:bg-dark hover:text-secondary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-secondary focus:text-secondary") : ("inline-flex items-center justify-center rounded-md p-2 text-primary hover:bg-dark hover:text-secondary focus:outline-none   ") }
               aria-controls="mobile-menu"
               aria-expanded="false"
               onClick={showMobileMenu}
@@ -185,7 +209,7 @@ useEffect(() => {
                 <button
                onClick={showProfileMenu}
                   type="button"
-                  className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  className="flex rounded-full bg-secondary text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-secondary"
                   id="user-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -265,7 +289,7 @@ useEffect(() => {
 
       {/* <!-- Mobile menu, show/hide based on menu state. --> */}
       <div className="md:hidden" id="mobile-menu" ref={mobileMenuRef}>
-        <div className= {mobileMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
+        <div ref={eventMenuRef} className= {mobileMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
           {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
           <a
             href="#"
@@ -282,12 +306,20 @@ useEffect(() => {
             Create Account
           </a>
           <a
-            href="#"
+            onClick={showEventMenu}
+            id="event-menu"
             className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
             aria-current="page"
           >
-            Events
+        
+
+            Events {" "}
+            {eventMenu ? (<svg className="h-6 w-6 text-secondary inline-block"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="4" width="16" height="16" rx="2" />  <line x1="9" y1="12" x2="15" y2="12" /></svg>) : ( <svg className="h-6 w-6 text-secondary inline-block"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="4" width="16" height="16" rx="2" />  <line x1="9" y1="12" x2="15" y2="12" />  <line x1="12" y1="9" x2="12" y2="15" /></svg>)}
+           
+        
           </a>
+          <div className="md:hidden" id="event-menu">
+          <div className= {eventMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
           <a
             href="#"
             className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
@@ -313,6 +345,8 @@ useEffect(() => {
           >
             More
           </a>
+          </div>
+          </div>
         </div>
       </div>
     </nav>
