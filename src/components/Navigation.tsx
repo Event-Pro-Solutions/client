@@ -13,16 +13,23 @@
 // User Signed In:
 // *Starting with the assumption all users are organizers and can create events
 // - Profile, SignOut, CreateEvent
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import textLogoLight from "../utils/images/textLogoLight.png"
 import Image from 'next/image'
 
 
 const Navigation = () => {
   const [profileMenu, setProfileMenu] = useState(false)
+  const profileMenuRef = useRef<HTMLDivElement>(null);
   const [mobileMenu, setMobileMenu] = useState(false)
-  // Placehoder for user
-  const [user, setUser] = useState(false)
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  // Placehoder for user - Update image when completed
+  const [user, setUser] = useState(true)
+
+  useEffect(() => {
+    setMobileMenu(false)
+    setProfileMenu(false)
+  }, [])
 
 const showProfileMenu = () => {
   if(!profileMenu){
@@ -32,7 +39,7 @@ const showProfileMenu = () => {
     setProfileMenu(false)
   }
 }
-console.log(profileMenu)
+
 const showMobileMenu = () => {
   if(!mobileMenu){
     setMobileMenu(true)
@@ -42,13 +49,42 @@ const showMobileMenu = () => {
   }
 }
 
-  const navLink =
-    'text-dark  border-b-4 border-transparent hover:border-secondary py-2'
+useEffect(() => {
+  function handleOutsideClick(event: MouseEvent) {
+
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
+        setProfileMenu(false);
+      }
+    }
+
+  document.addEventListener('click', handleOutsideClick);
+
+  return () => {
+    document.removeEventListener('click', handleOutsideClick);
+  };
+}, [profileMenu]);
+
+useEffect(() => {
+  function handleOutsideClick(event: MouseEvent) {
+
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+        setMobileMenu(false);
+      }
+    }
+
+  document.addEventListener('click', handleOutsideClick);
+
+  return () => {
+    document.removeEventListener('click', handleOutsideClick);
+  };
+}, [mobileMenu]);
+
+
   return (
     <nav className="bg-dark">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+          <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
             {/* <!-- Mobile menu button--> */}
             <button
               type="button"
@@ -100,7 +136,8 @@ const showMobileMenu = () => {
               </svg>
             </button>
           </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start ">
+          {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"> */}
+          <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start ">
             <a className="flex flex-shrink-0 items-center"  href="/">
               <Image
                 className="h-14 w-auto"
@@ -108,31 +145,31 @@ const showMobileMenu = () => {
                 alt="Your Company"
               ></Image>
             </a>
-            <div className="hidden sm:ml-6 sm:block">
+            <div className="hidden md:ml-6 md:block ">
               <div className="flex space-x-4">
                 {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                 <a
                   href="#"
-                  className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white mt-4 px-3 py-2 text-sm font-medium  border-b-4 border-transparent hover:border-secondary"
                   aria-current="page"
                 >
                   Concerts
                 </a>
                 <a
                   href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white   mt-4 px-3 py-2 text-sm font-medium  border-b-4 border-transparent hover:border-secondary"
                 >
                   Sports
                 </a>
                 <a
                   href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white   mt-4 px-3 py-2 text-sm font-medium  border-b-4 border-transparent hover:border-secondary"
                 >
                   Family
                 </a>
                 <a
                   href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                  className="text-white   mt-4 px-3 py-2 text-sm font-medium  border-b-4 border-transparent hover:border-secondary"
                 >
                   More
                 </a>
@@ -140,13 +177,7 @@ const showMobileMenu = () => {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <a
-                  href="#"
-                  className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                  aria-current="page"
-                >
-                  Help
-                </a>
+
 
             {/* <!-- Profile dropdown --> */}
             <div   className="relative ml-3">
@@ -167,18 +198,18 @@ const showMobileMenu = () => {
                   ></img>
                 </button>
               </div>) : (
-                 <div className="flex space-x-4">
+                 <div className="flex space-x-4 hidden md:ml-6 md:block">
                  {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                  <a
                    href="#"
-                   className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                   className="bg-primary text-white hover:bg-dark rounded-md px-3 py-2 text-sm font-medium"
                    aria-current="page"
                  >
                    Sign In
                  </a>
                  <a
                    href="#"
-                   className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                   className="bg-primary text-white hover:bg-dark rounded-md px-3 py-2 text-sm font-medium"
                  >
                    Create Account
                  </a>
@@ -197,8 +228,9 @@ const showMobileMenu = () => {
               From: "transform opacity-100 scale-100"
               To: "transform opacity-0 scale-95"
           --> */}
-              <div
-               className={profileMenu ? ("absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ") : ("absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden")}
+         
+              <div ref={profileMenuRef}
+               className={profileMenu ? ("absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-primary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ") : ("absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-primary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden")}
                
                 
                 role="menu"
@@ -209,7 +241,7 @@ const showMobileMenu = () => {
                 {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
                 <a
                   href="/user/profile"
-                  className="block px-4 py-2 text-sm text-gray-700"
+                  className="block px-4 py-2 text-md text-white rounded-md hover:bg-dark"
                   role="menuitem"
                   tabIndex={-1}
                   id="user-menu-item-0"
@@ -218,7 +250,7 @@ const showMobileMenu = () => {
                 </a>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700"
+                  className="block px-4 py-2 text-dm text-white rounded-md hover:bg-dark"
                   role="menuitem"
                   tabIndex={-1}
                   id="user-menu-item-2"
@@ -232,31 +264,52 @@ const showMobileMenu = () => {
       </div>
 
       {/* <!-- Mobile menu, show/hide based on menu state. --> */}
-      <div className="sm:hidden" id="mobile-menu">
+      <div className="md:hidden" id="mobile-menu" ref={mobileMenuRef}>
         <div className= {mobileMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
           {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
           <a
             href="#"
-            className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
+            className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
+            aria-current="page"
+          >
+            Sign In
+          </a>
+          <a
+            href="#"
+            className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
+            aria-current="page"
+          >
+            Create Account
+          </a>
+          <a
+            href="#"
+            className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
+            aria-current="page"
+          >
+            Events
+          </a>
+          <a
+            href="#"
+            className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
             aria-current="page"
           >
             Concerts
           </a>
           <a
             href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+            className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
           >
             Sports
           </a>
           <a
             href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+            className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
           >
             Family
           </a>
           <a
             href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+            className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
           >
             More
           </a>
