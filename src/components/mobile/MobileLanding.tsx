@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import textLogo from "../../utils/images/textLogoLight.png";
 import down from "../../utils/icons/down.png";
+import SmoothScroll from "@/hook/useSmoothScroll";
 
 const MobileLanding = memo(() => {
   return (
@@ -45,23 +46,29 @@ const MobileLanding = memo(() => {
               <div className="m-5">Search Bar Placeholder</div>
             </div>
           </div>
-          <div className="animate-bounce w-10 h-10 mb-10 mx-auto">
-            <Image
-              src={down}
-              alt="ticket logo"
-              // width={350}
-              // height={350}
-              layout="fixed"
-              className="invert"
-            />
-          </div>
+          <SmoothScroll />
+          {/* <div className="animate-bounce w-10 h-10 mb-10 mx-auto">
+            <a href="#mobile-links" className="scroll-smooth">
+              <Image
+                src={down}
+                alt="ticket logo"
+                // width={350}
+                // height={350}
+                layout="fixed"
+                className="invert"
+              />
+            </a>
+          </div> */}
         </section>
         <div className="rounded flex items-center z-10 mx-auto w-full">
           <div className="rounded bg-tabletBackground w-80 h-52 bg-contain bg-no-repeat mt-10 mb-10 z-10 mx-auto" />
         </div>
 
         <section className="w-screen h-screen relative z-10 flex flex-col items-center text-center">
-          <ul className="flex flex-col justify-between items-center mb-10 text-primary bold text-2xl">
+          <ul
+            id="mobile-links"
+            className="flex flex-col justify-between items-center mb-10 text-primary bold text-2xl"
+          >
             <Link href="/user/login">
               <li className="pt-2 pb-2 pl-5 pr-5 bg-dark rounded r-pointer">
                 Login
