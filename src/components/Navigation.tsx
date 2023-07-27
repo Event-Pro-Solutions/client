@@ -164,7 +164,8 @@ useEffect(() => {
 
 
   return (
-    <nav className="bg-dark">
+    <div className="relative z-10">
+    <nav className="bg-dark py-2 fixed top-0 left-0 right-0">
       <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
@@ -492,6 +493,7 @@ useEffect(() => {
         
       </div>
     </nav>
+    </div>
   )
 }
 export default Navigation
