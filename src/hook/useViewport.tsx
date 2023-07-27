@@ -1,52 +1,49 @@
-"use client";
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from "react";
+// contexts/ViewportContext.tsx
+'use client'
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface ViewportContextProps {
   width: number;
   height: number;
 }
 
-const ViewportContext = createContext<ViewportContextProps | undefined>(
-  undefined
-);
+const ViewportContext = createContext<ViewportContextProps | null>(null);
+
+export const useViewport = (): ViewportContextProps => {
+  const viewport = useContext(ViewportContext);
+  if (!viewport) {
+    throw new Error('useViewport must be used within a ViewportProvider');
+  }
+  return viewport;
+};
 
 interface ViewportProviderProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
-const ViewportProvider = ({ children }: ViewportProviderProps) => {
-  const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight);
+export const ViewportProvider: React.FC<ViewportProviderProps> = ({ children }) => {
+  const [viewport, setViewport] = useState<ViewportContextProps>({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
 
   const handleWindowResize = () => {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
+    setViewport({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
-    return () => window.removeEventListener("resize", handleWindowResize);
+    window.addEventListener('resize', handleWindowResize);
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
   }, []);
 
   return (
-    <ViewportContext.Provider value={{ width, height }}>
+    <ViewportContext.Provider value={viewport}>
       {children}
     </ViewportContext.Provider>
   );
 };
-
-export const useViewport = (): ViewportContextProps => {
-  const context = useContext(ViewportContext);
-  if (!context) {
-    throw new Error("useViewport must be used within a ViewportProvider");
-  }
-  return context;
-};
-
-export { ViewportProvider };
