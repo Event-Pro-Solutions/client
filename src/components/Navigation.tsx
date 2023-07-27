@@ -25,13 +25,23 @@ const Navigation = () => {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const [eventMenu, setEventMenu] = useState(false)
   const eventMenuRef = useRef<HTMLDivElement>(null);
-  // Placehoder for user - Update image when completed
+  // Placehoder for user
   const [user, setUser] = useState(true)
 
   useEffect(() => {
     setMobileMenu(false)
     setProfileMenu(false)
   }, [])
+
+
+  // Temp functions
+  const signOut = () => {
+    setUser(false)
+    setProfileMenu(false)
+  }
+  const signIn = () => {
+    setUser(true)
+  }
 
 const showProfileMenu = () => {
   if(!profileMenu){
@@ -160,7 +170,7 @@ useEffect(() => {
               </svg>
             </button>
           </div>
-          {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"> */}
+ 
           <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start ">
             <a className="flex flex-shrink-0 items-center"  href="/">
               <Image
@@ -200,7 +210,7 @@ useEffect(() => {
               </div>
             </div>
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
 
 
             {/* <!-- Profile dropdown --> */}
@@ -209,7 +219,7 @@ useEffect(() => {
                 <button
                onClick={showProfileMenu}
                   type="button"
-                  className="flex rounded-full bg-secondary text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-secondary"
+                  className={profileMenu ? ("flex rounded-full bg-secondary text-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-secondary") : ("flex rounded-full bg-secondary text-sm focus:outline-none ")}
                   id="user-menu-button"
                   aria-expanded="false"
                   aria-haspopup="true"
@@ -225,7 +235,7 @@ useEffect(() => {
                  <div className="flex space-x-4 hidden md:ml-6 md:block">
                  {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                  <a
-                   href="#"
+                   href="/user/login"
                    className="bg-primary text-white hover:bg-dark rounded-md px-3 py-2 text-sm font-medium"
                    aria-current="page"
                  >
@@ -273,7 +283,7 @@ useEffect(() => {
                   Profile
                 </a>
                 <a
-                  href="#"
+                  onClick = {signOut}
                   className="block px-4 py-2 text-dm text-white rounded-md hover:bg-dark"
                   role="menuitem"
                   tabIndex={-1}
@@ -292,7 +302,7 @@ useEffect(() => {
         <div ref={eventMenuRef} className= {mobileMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
           {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
           <a
-            href="#"
+            href="/user/login"
             className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
             aria-current="page"
           >
