@@ -23,10 +23,14 @@ const Navigation = () => {
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const [mobileMenu, setMobileMenu] = useState(false)
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const [accountMenu, setAccountMenu] = useState(false)
+  const accountMenuRef = useRef<HTMLDivElement>(null);
+  const [mobileAccountMenu, setMobileAccountMenu] = useState(false)
+  const mobileAccountMenuRef = useRef<HTMLDivElement>(null);
   const [eventMenu, setEventMenu] = useState(false)
   const eventMenuRef = useRef<HTMLDivElement>(null);
   // Placehoder for user
-  const [user, setUser] = useState(true)
+  const [user, setUser] = useState(false)
 
   useEffect(() => {
     setMobileMenu(false)
@@ -42,6 +46,7 @@ const Navigation = () => {
   const signIn = () => {
     setUser(true)
   }
+  // End of temp functions
 
 const showProfileMenu = () => {
   if(!profileMenu){
@@ -58,6 +63,20 @@ const showMobileMenu = () => {
     setProfileMenu(false)
   } else {
     setMobileMenu(false)
+  }
+}
+const showAccountMenu = () => {
+  if(!accountMenu){
+    setAccountMenu(true)
+  } else {
+    setAccountMenu(false)
+  }
+}
+const showMobileAccountMenu = () => {
+  if(!mobileAccountMenu){
+    setMobileAccountMenu(true)
+  } else {
+    setMobileAccountMenu(false)
   }
 }
 const showEventMenu = () => {
@@ -97,6 +116,36 @@ useEffect(() => {
     document.removeEventListener('click', handleOutsideClick);
   };
 }, [mobileMenu]);
+
+useEffect(() => {
+  function handleOutsideClick(event: MouseEvent) {
+
+      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target as Node)) {
+        setAccountMenu(false);
+      }
+    }
+
+  document.addEventListener('click', handleOutsideClick);
+
+  return () => {
+    document.removeEventListener('click', handleOutsideClick);
+  };
+}, [accountMenu]);
+
+useEffect(() => {
+  function handleOutsideClick(event: MouseEvent) {
+
+      if (mobileAccountMenuRef.current && !mobileAccountMenuRef.current.contains(event.target as Node)) {
+        setMobileAccountMenu(false);
+      }
+    }
+
+  document.addEventListener('click', handleOutsideClick);
+
+  return () => {
+    document.removeEventListener('click', handleOutsideClick);
+  };
+}, [mobileAccountMenu]);
 
 useEffect(() => {
   function handleOutsideClick(event: MouseEvent) {
@@ -233,20 +282,55 @@ useEffect(() => {
                 </button>
               </div>) : (
                  <div className="flex space-x-4 hidden md:ml-6 md:block">
-                 {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
+          
                  <a
                    href="/user/login"
-                   className="bg-primary text-white hover:bg-dark rounded-md px-3 py-2 text-sm font-medium"
+                   onClick={signIn}
+                   className="border-2 border-transparent bg-primary text-white hover:border-2 hover:border-secondary hover:bg-dark rounded-md px-3 py-2 text-sm font-medium"
                    aria-current="page"
                  >
                    Sign In
                  </a>
-                 <a
-                   href="#"
-                   className="bg-primary text-white hover:bg-dark rounded-md px-3 py-2 text-sm font-medium"
+                 <button
+                  onClick={showAccountMenu}
+                   id="account-menu-button"
+                   aria-expanded="false"
+                   aria-haspopup="true"
+                   className=" border-2 border-primary  text-white hover:border-secondary rounded-md px-3 py-2 text-sm font-medium "
                  >
+                  <span className="sr-only">Open account menu</span>
                    Create Account
-                 </a>
+                 </button> 
+
+                 <div ref={accountMenuRef}
+               className={accountMenu ? ("absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-primary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ") : ("absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-primary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden")}
+               
+                
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="user-menu-button"
+                tabIndex={-1}
+              >
+             
+                <a
+                  href="/user/create-customer"
+                  className="block px-4 py-2 text-md text-white rounded-md hover:bg-dark"
+                  role="menuitem"
+                  tabIndex={-1}
+                  id="account-menu-item-0"
+                >
+                  Customer
+                </a>
+                <a
+                  href="/user/create-organizer"
+                  className="block px-4 py-2 text-dm text-white rounded-md hover:bg-dark"
+                  role="menuitem"
+                  tabIndex={-1}
+                  id="account-menu-item-2"
+                >
+                  Organizer
+                </a>
+              </div>
 
                </div>
               )}
@@ -272,7 +356,7 @@ useEffect(() => {
                 aria-labelledby="user-menu-button"
                 tabIndex={-1}
               >
-                {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
+             
                 <a
                   href="/user/profile"
                   className="block px-4 py-2 text-md text-white rounded-md hover:bg-dark"
@@ -299,8 +383,36 @@ useEffect(() => {
 
       {/* <!-- Mobile menu, show/hide based on menu state. --> */}
       <div className="md:hidden" id="mobile-menu" ref={mobileMenuRef}>
-        <div ref={eventMenuRef} className= {mobileMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
+        {user ? (<div ref={eventMenuRef} className= {mobileMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
+
+          <a
+            href="#"
+            className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
+            aria-current="page"
+          >
+            Concerts
+          </a>
+          <a
+            href="#"
+            className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
+          >
+            Sports
+          </a>
+          <a
+            href="#"
+            className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
+          >
+            Family
+          </a>
+          <a
+            href="#"
+            className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
+          >
+            More
+          </a>
+        </div>) : (<div ref={eventMenuRef} className= {mobileMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
           {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
+          
           <a
             href="/user/login"
             className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
@@ -309,12 +421,31 @@ useEffect(() => {
             Sign In
           </a>
           <a
-            href="#"
+             onClick={showMobileAccountMenu}
+             id="account-menu"
             className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
             aria-current="page"
           >
-            Create Account
+            Create Account  {" "}
+            {mobileAccountMenu ? (<svg className="h-6 w-6 text-secondary inline-block"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="4" width="16" height="16" rx="2" />  <line x1="9" y1="12" x2="15" y2="12" /></svg>) : ( <svg className="h-6 w-6 text-secondary inline-block"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="4" width="16" height="16" rx="2" />  <line x1="9" y1="12" x2="15" y2="12" />  <line x1="12" y1="9" x2="12" y2="15" /></svg>)}
           </a>
+
+          <div className="md:hidden" id="account-menu" ref={mobileAccountMenuRef}>
+          <div className= {mobileAccountMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
+          <a
+            href="/user/create-customer"
+            className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
+          >
+            Customer Account
+          </a>
+          <a
+            href="/user/create-organizer"
+            className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
+          >
+            Organizer Account
+          </a>
+          </div>
+          </div>
           <a
             onClick={showEventMenu}
             id="event-menu"
@@ -328,7 +459,7 @@ useEffect(() => {
            
         
           </a>
-          <div className="md:hidden" id="event-menu">
+          <div className="md:hidden" id="event-menu" ref={eventMenuRef}>
           <div className= {eventMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
           <a
             href="#"
@@ -357,7 +488,8 @@ useEffect(() => {
           </a>
           </div>
           </div>
-        </div>
+        </div>)}
+        
       </div>
     </nav>
   )
