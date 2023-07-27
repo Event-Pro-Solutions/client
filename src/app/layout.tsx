@@ -2,7 +2,7 @@ import "./globals.css";
 import { Inter, Tenali_Ramakrishna, Ubuntu_Condensed } from "next/font/google";
 
 import Navigation from "@/components/Navigation";
-import { ViewportProvider } from "@/hook/useViewport";
+
 import ticketLogo from "../utils/images/ticketLogoLight.png";
 
 const inter = Inter({
@@ -35,13 +35,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ViewportProvider>
     <html lang="en">
       <body className={classNames}>
         <Navigation />
         {children}
       </body>
     </html>
-    </ViewportProvider>
   );
 }
