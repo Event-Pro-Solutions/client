@@ -12,9 +12,9 @@ interface ViewportContextProps {
   height: number;
 }
 
-const ViewportContext = createContext<ViewportContextProps | undefined>(
-  undefined
-);
+const ViewportContext = createContext<ViewportContextProps>(
+  {} as ViewportContextProps
+) || ({} as ViewportContextProps);
 
 interface ViewportProviderProps {
   children: ReactNode;
