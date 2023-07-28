@@ -27,7 +27,7 @@ const Navigation = () => {
   const [eventMenu, setEventMenu] = useState(false)
   const eventMenuRef = useRef<HTMLDivElement>(null);
   // Placehoder for user
-  const [user, setUser] = useState(false)
+  const [user, setUser] = useState(true)
 
   useEffect(() => {
     setMobileMenu(false)
@@ -250,13 +250,13 @@ useEffect(() => {
                  </a>
 
                  <a
-                  href="/user/createAccount"
+                  href="/user/create-account"
                    id="account-menu-button"
                    aria-expanded="false"
                    aria-haspopup="true"
                    className=" border-2 border-primary  text-white hover:border-secondary rounded-md px-3 py-2 text-sm font-medium "
                  >
-                  <span className="sr-only">Open account menu</span>
+           
                    Create Account
                  </a> 
                  
@@ -294,6 +294,15 @@ useEffect(() => {
                   id="user-menu-item-0"
                 >
                   Profile
+                </a>
+                <a
+                  href="/events/create-event"
+                  className="block px-4 py-2 text-md text-white rounded-md hover:bg-dark"
+                  role="menuitem"
+                  tabIndex={-1}
+                  id="user-menu-item-0"
+                >
+                  Create New Event
                 </a>
                 <a
                   onClick = {signOut}
@@ -350,7 +359,7 @@ useEffect(() => {
             Sign In
           </a>
           <a
-            href="/user/createAccount"
+            href="/user/create-account"
             className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
             aria-current="page"
           >
