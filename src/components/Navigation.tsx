@@ -23,10 +23,7 @@ const Navigation = () => {
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const [mobileMenu, setMobileMenu] = useState(false)
   const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const [accountMenu, setAccountMenu] = useState(false)
-  const accountMenuRef = useRef<HTMLDivElement>(null);
-  const [mobileAccountMenu, setMobileAccountMenu] = useState(false)
-  const mobileAccountMenuRef = useRef<HTMLDivElement>(null);
+
   const [eventMenu, setEventMenu] = useState(false)
   const eventMenuRef = useRef<HTMLDivElement>(null);
   // Placehoder for user
@@ -65,20 +62,7 @@ const showMobileMenu = () => {
     setMobileMenu(false)
   }
 }
-const showAccountMenu = () => {
-  if(!accountMenu){
-    setAccountMenu(true)
-  } else {
-    setAccountMenu(false)
-  }
-}
-const showMobileAccountMenu = () => {
-  if(!mobileAccountMenu){
-    setMobileAccountMenu(true)
-  } else {
-    setMobileAccountMenu(false)
-  }
-}
+
 const showEventMenu = () => {
   if(!eventMenu){
     setEventMenu(true)
@@ -117,35 +101,7 @@ useEffect(() => {
   };
 }, [mobileMenu]);
 
-useEffect(() => {
-  function handleOutsideClick(event: MouseEvent) {
 
-      if (accountMenuRef.current && !accountMenuRef.current.contains(event.target as Node)) {
-        setAccountMenu(false);
-      }
-    }
-
-  document.addEventListener('click', handleOutsideClick);
-
-  return () => {
-    document.removeEventListener('click', handleOutsideClick);
-  };
-}, [accountMenu]);
-
-useEffect(() => {
-  function handleOutsideClick(event: MouseEvent) {
-
-      if (mobileAccountMenuRef.current && !mobileAccountMenuRef.current.contains(event.target as Node)) {
-        setMobileAccountMenu(false);
-      }
-    }
-
-  document.addEventListener('click', handleOutsideClick);
-
-  return () => {
-    document.removeEventListener('click', handleOutsideClick);
-  };
-}, [mobileAccountMenu]);
 
 useEffect(() => {
   function handleOutsideClick(event: MouseEvent) {
@@ -292,8 +248,9 @@ useEffect(() => {
                  >
                    Sign In
                  </a>
-                 <button
-                  onClick={showAccountMenu}
+
+                 <a
+                  href="/user/createAccount"
                    id="account-menu-button"
                    aria-expanded="false"
                    aria-haspopup="true"
@@ -301,37 +258,8 @@ useEffect(() => {
                  >
                   <span className="sr-only">Open account menu</span>
                    Create Account
-                 </button> 
-
-                 <div ref={accountMenuRef}
-               className={accountMenu ? ("absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-primary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ") : ("absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-primary py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden")}
-               
-                
-                role="menu"
-                aria-orientation="vertical"
-                aria-labelledby="user-menu-button"
-                tabIndex={-1}
-              >
-             
-                <a
-                  href="/user/create-customer"
-                  className="block px-4 py-2 text-md text-white rounded-md hover:bg-dark"
-                  role="menuitem"
-                  tabIndex={-1}
-                  id="account-menu-item-0"
-                >
-                  Customer
-                </a>
-                <a
-                  href="/user/create-organizer"
-                  className="block px-4 py-2 text-dm text-white rounded-md hover:bg-dark"
-                  role="menuitem"
-                  tabIndex={-1}
-                  id="account-menu-item-2"
-                >
-                  Organizer
-                </a>
-              </div>
+                 </a> 
+                 
 
                </div>
               )}
@@ -422,31 +350,13 @@ useEffect(() => {
             Sign In
           </a>
           <a
-             onClick={showMobileAccountMenu}
-             id="account-menu"
+            href="/user/createAccount"
             className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
             aria-current="page"
           >
-            Create Account  {" "}
-            {mobileAccountMenu ? (<svg className="h-6 w-6 text-secondary inline-block"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="4" width="16" height="16" rx="2" />  <line x1="9" y1="12" x2="15" y2="12" /></svg>) : ( <svg className="h-6 w-6 text-secondary inline-block"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <rect x="4" y="4" width="16" height="16" rx="2" />  <line x1="9" y1="12" x2="15" y2="12" />  <line x1="12" y1="9" x2="12" y2="15" /></svg>)}
+            Create Account
           </a>
-
-          <div className="md:hidden" id="account-menu" ref={mobileAccountMenuRef}>
-          <div className= {mobileAccountMenu ? ("space-y-1 px-2 pb-3 pt-2") : ("space-y-1 px-2 pb-3 pt-2 hidden")}>
-          <a
-            href="/user/create-customer"
-            className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
-          >
-            Customer Account
-          </a>
-          <a
-            href="/user/create-organizer"
-            className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
-          >
-            Organizer Account
-          </a>
-          </div>
-          </div>
+          
           <a
             onClick={showEventMenu}
             id="event-menu"
