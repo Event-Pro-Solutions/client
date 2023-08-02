@@ -9,6 +9,8 @@ import baseball from "../../../utils/images/baseball.webp";
 // {"_id":"64c82df01662e48507781c97","name":"Event 2","is_virtual":false,"location":"New York","startDatetime":"2023-08-02T18:00:00.000Z","endDatetime":"2023-08-02T20:00:00.000Z","price":20,"tags":["entertainment"],"creatorId":"60d5ecb8b48738759f80f842","managedBy":["60d5ecb8b48738759f80f843"],"imgUrl":"http://example.com/event2.png","description":"This is a description for Event 2"}
 
 function EventDetailPage() {
+  // temp
+  const eventId = "/64c82df01662e48507781c97";
   interface EventModel {
     name: string;
     is_virtual: boolean;
@@ -36,9 +38,9 @@ function EventDetailPage() {
     description: "",
   };
 
-  // temp
-  const EVENTS_URL =
-    "https://api-vni1.onrender.com/events/64c82df01662e48507781c97 ";
+  const EVENTS_URL = process.env.EVENT_API_URL;
+
+  console.log(EVENTS_URL + eventId);
 
   const [event, setEvent] = useState<EventModel>(InitialState);
   const [start, setStart] = useState<string>("");
@@ -47,7 +49,7 @@ function EventDetailPage() {
 
   useEffect(() => {
     const getEvent = async () => {
-      const response = await fetch(EVENTS_URL);
+      const response = await fetch(EVENTS_URL + eventId);
       const json = await response.json();
 
       setEvent(json.event);

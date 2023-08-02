@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    customKey: "my-value",
+    EVENT_API_URL: process.env.EVENT_API_URL,
   },
 };
 
