@@ -1,10 +1,4 @@
 "use client";
-// Purpose: List out all event details
-
-// Functionality:
-// - Populate the following information (update as needed): Name of Event, In person vs virtual, Start Date, End Date, Time, Tags, Image, Price, Description
-// - Provide registration option -> onClick show registration confirmation (RegistrationComplete popup Module)
-// Updated registration based on a users registration status
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
@@ -49,6 +43,7 @@ function EventDetailPage() {
   const [event, setEvent] = useState<EventModel>(InitialState);
   const [start, setStart] = useState<string>("");
   const [end, setEnd] = useState<string>("");
+  const [eventRegister, setEventRegister] = useState<boolean>(false);
 
   useEffect(() => {
     const getEvent = async () => {
@@ -101,6 +96,15 @@ function EventDetailPage() {
     // .catch(console.log(error))
   }, []);
 
+  const register = () => {
+    if (eventRegister) {
+      setEventRegister(false);
+    } else {
+      setEventRegister(true);
+      alert("Registered!");
+    }
+  };
+
   return (
     <div className="overflow-hidden mt-24 h-full min-h-screen">
       <div className=" flex flex-row my-8 mx-4 xl:mx-32 flex-wrap">
@@ -124,18 +128,27 @@ function EventDetailPage() {
             <h1 className=" py-2">Cost: ${event.price}</h1>
             <h1 className=" py-2">Hosted By: {event.creatorId}</h1>
             <h1 className=" py-2">{event.description}</h1>
-            <button
-              className="bg-dark hover:bg-secondary text-white font-bold py-4 px-4 my-4 rounded focus:outline-none focus:shadow-outline m-auto text-1xl sm:text-4xl"
-              type="submit"
-            >
-              Register Today!
-            </button>
+            {eventRegister ? (
+              <button
+                className="bg-dark hover:bg-secondary text-white font-bold py-4 px-4 my-4 rounded focus:outline-none focus:shadow-outline m-auto text-1xl sm:text-4xl"
+                type="submit"
+                onClick={register}
+              >
+                Registered
+              </button>
+            ) : (
+              <button
+                className="bg-dark hover:bg-secondary text-white font-bold py-4 px-4 my-4 rounded focus:outline-none focus:shadow-outline m-auto text-1xl sm:text-4xl"
+                type="submit"
+                onClick={register}
+              >
+                Register Today!
+              </button>
+            )}
           </div>
         </div>
       </div>
     </div>
-
-    /* {"_id":"64c82df01662e48507781c97","name":"Event 2","is_virtual":false,"location":"New York","startDatetime":"2023-08-02T18:00:00.000Z","endDatetime":"2023-08-02T20:00:00.000Z","price":20,"tags":["entertainment"],"creatorId":"60d5ecb8b48738759f80f842","managedBy":["60d5ecb8b48738759f80f843"],"imgUrl":"http://example.com/event2.png","description":"This is a description for Event 2"} */
   );
 }
 
