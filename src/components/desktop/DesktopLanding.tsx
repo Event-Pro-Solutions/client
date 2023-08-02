@@ -27,7 +27,7 @@ const DesktopLanding = memo(() => {
                   </p>
                   <div
                     className="text-xl mt-5 bg-white w-96 flex justify-between rounded text-dark items-center 
-                  focus:outline-none focus-visible:ring-4 ring-accent ring-offset-bkg ring-offset-2 hover:bg-slate-300/90 
+                  focus:outline-none focus-visible:ring-4 ring-accent ring-offset-dark ring-offset-2 hover:bg-slate-300/90 
                   space-x-2 drop-shadow-text-lg hover:drop-shadow-none transition-shadow distance-2 pl-2"
                   >
                     Placeholder Search Bar{" "}
