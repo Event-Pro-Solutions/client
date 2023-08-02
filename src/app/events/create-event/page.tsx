@@ -10,7 +10,7 @@ import React , {useState, useEffect, useRef} from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-import ticket from '../../../utils/images/ticket.jpg'
+import ticketLogoLight from "../../../utils/images/ticketLogoLight.png"
 import DateTimePicker from '@/components/DateTimePicker'
 import CategoryDropdown from '@/components/CategoryDropdown'
 
@@ -147,7 +147,7 @@ function displayText(choice: string) {
       <div>
         <Image
           className="mx-auto h-12 w-auto mt-4"
-          src={ticket}
+          src={ticketLogoLight}
           alt="ticket logo"
         ></Image>
 

@@ -1,7 +1,7 @@
-// Purpose: Allow organizer to log in
+// Purpose: Allow an Organizer to create an account
 
 // Functionality:
-// - Organizer Inputs (update as needed): Email, Password
+// - Organizer Inputs (update as needed): Name, Email, Password Image (optional)
 // - Welcome Modal on submission
 // - Redirect to Profile on completion
 'use client'
@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import ticket from '../../../utils/images/ticketLogoLight.png'
 
-export default function CreateCustomerAccountForm() {
+export default function CreateOrganizerAccountForm() {
   const router = useRouter()
   // Handles the submit event on form submit.
   const handleSubmit = async (event: any) => {
@@ -20,14 +20,15 @@ export default function CreateCustomerAccountForm() {
 
     // Get data from the form.
     const data = {
-      username: event.target.username.value,
+      organizerName: event.target.organizerName.value,
+      email: event.target.email.value,
       password: event.target.password.value,
     }
 
     // // Send the data to the server in JSON format.
     // const JSONdata = JSON.stringify(data)
 
-    alert(`Hi ${data.username}`)
+    alert(`Account created for ${data.organizerName}`)
 
     router.push('/user/profile')
 
@@ -56,7 +57,7 @@ export default function CreateCustomerAccountForm() {
   }
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
-      <div className="bg-white max-w-md w-full space-y-8 text-dark shadow-md rounded border-solid border-2 border-primary">
+      <div className="bg-white  max-w-md w-full space-y-8 text-dark border-solid border-2 border-primary ">
         <div>
           <Image
             className="mx-auto h-12 w-auto mt-4"
@@ -65,30 +66,47 @@ export default function CreateCustomerAccountForm() {
           ></Image>
 
           <h2 className="mt-6 text-center text-3xl font-extrabold">
-            EventPro Login
+            Create your EventPro Organizer Account
           </h2>
         </div>
         <div className="max-w-md w-full space-y-8">
           <form
-            className=" shadow-md rounded px-8 pt-6 pb-8"
             onSubmit={handleSubmit}
+            className=" shadow-md rounded px-8 pt-6 pb-8  "
           >
             <div className="mb-4">
               <label
+                htmlFor="organizerName"
                 className="block text-dark text-sm font-bold mb-2"
-                htmlFor="userName"
               >
-                Username
+                Organizer Name
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
-                id="username"
-                placeholder="Username"
+                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                id="organizerName"
                 type="text"
-                name="userName"
+                placeholder="Organizer Name"
+                name="organizerName"
                 required
               />
             </div>
+            <div className="mb-4">
+              <label
+                className="block text-dark text-sm font-bold mb-2"
+                htmlFor="email"
+              >
+                Email
+              </label>
+              <input
+                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                placeholder="Email"
+                type="email"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+
             <div className="mb-4">
               <label
                 className="block text-dark text-sm font-bold mb-2"
@@ -97,7 +115,7 @@ export default function CreateCustomerAccountForm() {
                 Password
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
                 placeholder="******"
                 type="password"
                 id="password"
@@ -110,7 +128,7 @@ export default function CreateCustomerAccountForm() {
                 className="bg-dark hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-auto"
                 type="submit"
               >
-                Login
+                Create Account
               </button>
             </div>
             <div>
