@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import ticket from '../../../utils/images/ticket.jpg'
 import DateTimePicker from '@/components/DateTimePicker'
+import CategoryDropdown from '@/components/CategoryDropdown'
 
 
 function CreateEventForm() {
@@ -94,7 +95,7 @@ function displayText(choice: string) {
     setVirtual(false)
   }
 }
-console.log(virtual)
+
 
   const handleSubmit = async (event: any) => {
     // Stop the form from submitting and refreshing the page.
@@ -256,14 +257,7 @@ console.log(virtual)
             >
               Event Type
             </label>
-            <input
-              className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
-              placeholder="Event Type"
-              type="text"
-              id="eventType"
-              name="eventType"
-              required
-            />
+            <CategoryDropdown/>
           </div>
           <div className="mb-4">
             <label
