@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import baseball from "@/utils/images/baseball.webp";
+import baseball from "@/assets/images/baseball.webp";
 // module resolution
 import { useEvent } from "@/hooks";
 import { dateFull, partialDate, partialTime } from "@/utils/dateFormatter";
