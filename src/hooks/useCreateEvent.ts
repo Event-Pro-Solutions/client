@@ -13,8 +13,9 @@ interface EventModel {
   imgUrl: string | null;
   description: string | null;
 }
-// get a single events
-export const useEvent = (id: string) => {
+// Create a new event
+
+export const useCreateEvent = (eventData: EventModel, user: any) => {
   const EVENTS_URL = process.env.EVENT_API_URL;
   const [data, setData] = useState<EventModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,10 +24,21 @@ export const useEvent = (id: string) => {
   useEffect(() => {
     const getData = async () => {
       // try catch finally
-      if (EVENTS_URL) {
+      if (EVENTS_URL && eventData) {
         try {
           setIsLoading(true);
-          const response = await fetch(`${EVENTS_URL}/${id}`);
+          const config = {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          };
+          const response = await fetch(`${EVENTS_URL}/createEvent`, {
+            method: "POST",
+            headers: {
+              ...config.headers,
+            },
+            body: JSON.stringify(eventData),
+          });
 
           const data = await response.json();
           setData(data.event);
