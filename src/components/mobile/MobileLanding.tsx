@@ -2,8 +2,8 @@ import React, { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import textLogo from "../../utils/images/textLogoLight.png";
-import down from "../../utils/icons/down.png";
+import textLogo from "@/assets/images/textLogoLight.png";
+import down from "@/assets/icons/down.png";
 import SmoothScroll from "@/hooks/useSmoothScroll";
 
 const MobileLanding = memo(() => {
