@@ -66,8 +66,15 @@ function CreateEventForm() {
       // no decimal entered
       // add commas to the number
       // remove all non-digits
+  
       const formattedValue = formatNumber(inputValue);
-      return '$' + formattedValue + (blur === 'blur' ? '.00' : '');
+      if (formattedValue == ""){
+        return '$' + formattedValue + (blur === 'blur' ? '0.00' : '');
+
+      } else {
+
+        return '$' + formattedValue + (blur === 'blur' ? '.00' : '');
+      }
     }
   };
 
@@ -234,8 +241,9 @@ console.log(virtual)
             <input
               className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
              
-             type="text" name="price" id="price" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="$1,000,000.00"
-            
+             type="text" name="price" id="price" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value={price} data-type="currency" placeholder="$1,000,000.00"
+             onChange={handlePriceChange}
+             onBlur={handleBlur}
          
 
               required
