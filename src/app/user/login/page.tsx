@@ -5,13 +5,30 @@
 // - Welcome Modal on submission
 // - Redirect to Profile on completion
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ticket from "@/assets/images/ticketLogoLight.png";
+import { useLogin } from "@/hooks";
+
+interface UserModel {
+  name: string;
+  email: string;
+  username: string;
+  password: string;
+  imageUrl: string | null;
+}
+
+interface CredentialModel {
+  username: string;
+  password: string;
+}
 
 export default function CreateCustomerAccountForm() {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
   const router = useRouter();
   // Handles the submit event on form submit.
   const handleSubmit = async (event: any) => {
@@ -24,35 +41,15 @@ export default function CreateCustomerAccountForm() {
       password: event.target.password.value,
     };
 
+    setUsername(username);
+    setPassword(password);
+
     // // Send the data to the server in JSON format.
     // const JSONdata = JSON.stringify(data)
 
     alert(`Hi ${data.username}`);
 
-    router.push("/user/profile");
-
-    // // API endpoint where we send form data.
-    // const endpoint = '/api/createOrganizer'
-
-    // // Form the request for sending data to the server.
-    // const options = {
-    //   // The method is POST because we are sending data.
-    //   method: 'POST',
-    //   // Tell the server we're sending JSON.
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   // Body of the request is the JSON data we created above.
-    //   body: JSONdata,
-    // }
-
-    // // Send the form data to our forms API on Vercel and get a response.
-    // const response = await fetch(endpoint, options)
-
-    // // Get the response data from server as JSON.
-    // // If server returns the name submitted, that means the form works.
-    // const result = await response.json()
-    // alert(`Is this your full name: ${result.data}`)
+    // router.push("/user/profile");
   };
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
