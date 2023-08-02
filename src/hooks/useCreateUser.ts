@@ -10,7 +10,7 @@ interface UserModel {
 // Create a new event
 
 export const useCreateUser = (userData: UserModel, user: any) => {
-  const USERS_URL = process.env.USER_API_URL;
+  const AUTH_URL = process.env.AUTH_API_URL;
   const [data, setData] = useState<UserModel | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
@@ -18,7 +18,7 @@ export const useCreateUser = (userData: UserModel, user: any) => {
   useEffect(() => {
     const getData = async () => {
       // try catch finally
-      if (USERS_URL && userData) {
+      if (AUTH_URL && userData) {
         try {
           setIsLoading(true);
           const config = {
@@ -26,7 +26,7 @@ export const useCreateUser = (userData: UserModel, user: any) => {
               Authorization: `Bearer ${user.token}`,
             },
           };
-          const response = await fetch(`${USERS_URL}/createEvent`, {
+          const response = await fetch(`${AUTH_URL}/signup`, {
             method: "POST",
             headers: {
               ...config.headers,
