@@ -97,47 +97,16 @@ function CreateEventForm() {
     event.preventDefault();
 
     // Get data from the form.
-    const data = {
-      firstName: event.target.firstName.value,
-      lastName: event.target.lastName.value,
-      email: event.target.email.value,
-      username: event.target.username.value,
-      password: event.target.password.value,
-    };
+    const data = {};
 
     // // Send the data to the server in JSON format.
     // const JSONdata = JSON.stringify(data)
 
-    alert(`Hi ${data.firstName}`);
-
     router.push("/user/profile");
-
-    // // API endpoint where we send form data.
-    // const endpoint = '/api/createOrganizer'
-
-    // // Form the request for sending data to the server.
-    // const options = {
-    //   // The method is POST because we are sending data.
-    //   method: 'POST',
-    //   // Tell the server we're sending JSON.
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   // Body of the request is the JSON data we created above.
-    //   body: JSONdata,
-    // }
-
-    // // Send the form data to our forms API on Vercel and get a response.
-    // const response = await fetch(endpoint, options)
-
-    // // Get the response data from server as JSON.
-    // // If server returns the name submitted, that means the form works.
-    // const result = await response.json()
-    // alert(`Is this your full name: ${result.data}`)
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 mt-12">
       <div className="bg-white max-w-lg w-full space-y-8 text-dark border-solid border-2 border-primary">
         <div>
           <Image
@@ -151,36 +120,22 @@ function CreateEventForm() {
           </h2>
         </div>
         <div className="max-w-lg w-full space-y-8">
-          <form className="rounded px-8 pt-6 pb-8" onSubmit={handleSubmit}>
-            <div className="mb-4 relative">
+          <form
+            className="rounded px-4 sm:px-8 pt-6 pb-8"
+            onSubmit={handleSubmit}
+          >
+            <div className="mb-4 relative px-2">
               <label
-                className="block text-dark text-sm font-bold mb-2  text-center"
+                className="block text-dark text-sm font-bold mb-2  "
                 htmlFor="eventName"
               >
                 Event Name
               </label>
               <input
                 className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
-                placeholder="Event Name"
                 type="text"
                 id="eventName"
                 name="eventName"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-dark text-sm font-bold mb-2  text-center"
-                htmlFor="description"
-              >
-                Event Details
-              </label>
-              <input
-                className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
-                placeholder="Event Description"
-                type="text"
-                id="description"
-                name="description"
                 required
               />
             </div>
@@ -188,14 +143,14 @@ function CreateEventForm() {
             {/* Date and Time picker */}
             <div>
               <label
-                className="block text-dark text-sm font-bold mb-2 text-center"
+                className="block text-dark text-sm font-bold mb-2 px-2"
                 htmlFor="startDateTime"
               >
                 Date and Time
               </label>
             </div>
             <div className="display: inline-block">
-              <div className="display: inline-block px-2">
+              <div className="display: inline-block px-2 w-full sm:w-52">
                 <label
                   className="display: block text-dark text-sm font-bold mb-2  text-center"
                   htmlFor="startDateTime"
@@ -206,9 +161,9 @@ function CreateEventForm() {
                 <DateTimePicker />
               </div>
 
-              <div className="display: inline-block">
+              <div className="display: inline-block px-2 w-full sm:w-52 sm:ml-3">
                 <label
-                  className=" display: block text-dark text-sm font-bold mb-2  text-center"
+                  className=" display: block text-dark text-sm font-bold mb-2  text-center "
                   htmlFor="endDateTime"
                 >
                   End
@@ -217,114 +172,131 @@ function CreateEventForm() {
               </div>
             </div>
 
-            <div className="mb-4">
+            <div className="display: inline-block w-full">
+              <div className=" display: inline-block px-2 w-full sm:w-52">
+                <label
+                  className=" display: block text-dark text-sm font-bold mb-2 md:text-center w-full  text-left"
+                  htmlFor="price"
+                >
+                  Event Price
+                </label>
+
+                <input
+                  className=" shadow appearance-none border rounded border-accent mb-4 p-2 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent  w-full "
+                  type="text"
+                  name="price"
+                  id="price"
+                  pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                  value={price}
+                  data-type="currency"
+                  placeholder="$0.00"
+                  onChange={handlePriceChange}
+                  onBlur={handleBlur}
+                  required
+                />
+              </div>
+              <div className="px-2 display: inline-block pr-2  mb-4 w-full sm:w-52 sm:ml-3 md:w-1/2">
+                <label
+                  className="display: block text-dark text-sm font-bold mb-2 text-left md:text-center w-full"
+                  htmlFor="eventType"
+                >
+                  Event Type
+                </label>
+                <CategoryDropdown />
+              </div>
+              <div className="md:display: inline-block display: block pb-4 w-full">
+                <label
+                  className="display: block text-dark text-sm font-bold mb-2 text-center "
+                  htmlFor="virtual"
+                >
+                  Virtual Event?
+                </label>
+                <div className="flex justify-center">
+                  <div
+                    onClick={() => displayText("yes")}
+                    className={
+                      virtual
+                        ? "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2   text-center bg-primary"
+                        : "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2   text-center"
+                    }
+                    placeholder="Virtual or In Person"
+                    // type="text"
+                    // name="virtual"
+                    // required
+                    // id="virtual"
+                  >
+                    Yes
+                  </div>
+                  <div
+                    onClick={() => displayText("no")}
+                    className={
+                      virtual
+                        ? "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2  md:ml-2 text-center "
+                        : "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2  text-center bg-primary"
+                    }
+                    placeholder="Virtual or In Person"
+                    // type="text"
+                    // name="virtual"
+                    // required
+                    // id="virtual"
+                  >
+                    No
+                  </div>
+                </div>
+              </div>
+
+              {!virtual ? (
+                <div className="mb-4 px-2">
+                  <label
+                    className="block text-dark text-sm font-bold mb-2"
+                    htmlFor="location"
+                  >
+                    Location
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
+                    name="location"
+                    required
+                    type="text"
+                    id="location"
+                  />
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
+
+            <div className="mb-4 px-2">
               <label
-                className="block text-dark text-sm font-bold mb-2"
-                htmlFor="price"
+                className="block text-dark text-sm font-bold mb-2 "
+                htmlFor="description"
               >
-                Event Price
+                Event Details
               </label>
-              <input
+              <textarea
                 className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
-                type="text"
-                name="price"
-                id="price"
-                pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
-                value={price}
-                data-type="currency"
-                placeholder="$1,000,000.00"
-                onChange={handlePriceChange}
-                onBlur={handleBlur}
+                id="description"
+                name="description"
                 required
               />
             </div>
-            <div className="mb-4">
+
+            <div className="mb-4 px-2">
               <label
-                className="block text-dark text-sm font-bold mb-2"
-                htmlFor="eventType"
-              >
-                Event Type
-              </label>
-              <CategoryDropdown />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-dark text-sm font-bold mb-2"
+                className="block text-dark text-sm font-bold mb-2 "
                 htmlFor="eventImage"
               >
                 Event Image
               </label>
               <input
                 className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
-                placeholder="Event Image"
+                placeholder="Image URL"
                 type="text"
                 id="eventImage"
                 name="eventImage"
                 required
               />
             </div>
-
-            <div className="mb-4">
-              <label
-                className="block text-dark text-sm font-bold mb-2"
-                htmlFor="virtual"
-              >
-                Will this be a Virtual Event?
-              </label>
-              <div>
-                <div
-                  onClick={() => displayText("yes")}
-                  className={
-                    virtual
-                      ? "display: inline-block shadow appearance-none border rounded border-accent  py-2 px-3 w-20 mx-2 text-center bg-primary"
-                      : "display: inline-block shadow appearance-none border rounded border-accent  py-2 px-3 w-20 mx-2 text-center"
-                  }
-                  placeholder="Virtual or In Person"
-                  // type="text"
-                  // name="virtual"
-                  // required
-                  // id="virtual"
-                >
-                  Yes
-                </div>
-                <div
-                  onClick={() => displayText("no")}
-                  className={
-                    virtual
-                      ? "display: inline-block shadow appearance-none border rounded border-accent  py-2 px-3 w-20 mx-2 text-center "
-                      : "display: inline-block shadow appearance-none border rounded border-accent  py-2 px-3 w-20 mx-2 text-center bg-primary"
-                  }
-                  placeholder="Virtual or In Person"
-                  // type="text"
-                  // name="virtual"
-                  // required
-                  // id="virtual"
-                >
-                  No
-                </div>
-              </div>
-            </div>
-
-            {!virtual ? (
-              <div className="mb-4">
-                <label
-                  className="block text-dark text-sm font-bold mb-2"
-                  htmlFor="location"
-                >
-                  Location
-                </label>
-                <input
-                  className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
-                  placeholder="Location"
-                  name="location"
-                  required
-                  type="text"
-                  id="location"
-                />
-              </div>
-            ) : (
-              <></>
-            )}
 
             <div className="flex items-center justify-between">
               <button
