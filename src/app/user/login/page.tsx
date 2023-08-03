@@ -5,7 +5,7 @@
 // - Welcome Modal on submission
 // - Redirect to Profile on completion
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -25,29 +25,57 @@ interface CredentialModel {
   password: string;
 }
 
-export default function CreateCustomerAccountForm() {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-
+export default function Login() {
+  const AUTH_URL = process.env.AUTH_API_URL;
+  console.log(AUTH_URL);
+  // const [credentials, setCredentials] = useState<CredentialModel>({
+  //   username: "",
+  //   password: "",
+  // });
+  const [data, setData] = useState<any>(null);
+  const [submit, setSubmit] = useState<boolean>(false);
   const router = useRouter();
+
+  async function loginUser(credentials: object) {
+    try {
+      const response = await fetch(`${AUTH_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Specify the content type as JSON
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      if (!response.ok) {
+        throw new Error("Login failed"); // Handle non-OK response status (e.g., 400, 500, etc.)
+      }
+
+      const data = await response.json(); // Parse the JSON data from the response
+      console.log(data);
+      return data;
+    } catch (error) {
+      // Handle any errors that occurred during the fetch request
+      console.error("Login failed:", error);
+      throw error; // Rethrow the error to be handled by the caller
+    }
+  }
+
   // Handles the submit event on form submit.
   const handleSubmit = async (event: any) => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault();
 
     // Get data from the form.
-    const data = {
+    let credentials = {
       username: event.target.username.value,
       password: event.target.password.value,
     };
+    loginUser(credentials);
 
-    setUsername(username);
-    setPassword(password);
+    // useLogin(event.target.username.value, event.target.password.value);
 
     // // Send the data to the server in JSON format.
     // const JSONdata = JSON.stringify(data)
-
-    alert(`Hi ${data.username}`);
 
     // router.push("/user/profile");
   };
