@@ -12,14 +12,6 @@ import Image from "next/image";
 import ticket from "@/assets/images/ticketLogoLight.png";
 import { useLogin } from "@/hooks";
 
-interface UserModel {
-  name: string;
-  email: string;
-  username: string;
-  password: string;
-  imageUrl: string | null;
-}
-
 interface CredentialModel {
   username: string;
   password: string;
@@ -38,7 +30,7 @@ export default function Login() {
 
   async function loginUser(credentials: object) {
     try {
-      const response = await fetch(`${AUTH_URL}/auth/login`, {
+      const response = await fetch(`${AUTH_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Specify the content type as JSON

@@ -21,21 +21,21 @@ export const useCreateUser = (userData: UserModel, user: any) => {
       if (AUTH_URL && userData) {
         try {
           setIsLoading(true);
-          const config = {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          };
+          // const config = {
+          //   headers: {
+          //     Authorization: `Bearer ${user.token}`,
+          //   },
+          // };
           const response = await fetch(`${AUTH_URL}/signup`, {
             method: "POST",
-            headers: {
-              ...config.headers,
-            },
+            // headers: {
+            //   ...config.headers,
+            // },
             body: JSON.stringify(userData),
           });
 
           const data = await response.json();
-          setData(data.event);
+          setData(data);
         } catch {
           setIsError(true);
         } finally {

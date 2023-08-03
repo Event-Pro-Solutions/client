@@ -7,9 +7,15 @@ interface UserModel {
   password: string;
   imageUrl: string | null;
 }
-// Create a new event
 
-export const useLogin = (username: string, password: string) => {
+interface CredentialModel {
+  username: "";
+  password: "";
+}
+
+// Log in user
+
+export const useLogin = (credentials: CredentialModel) => {
   const AUTH_URL = process.env.AUTH_API_URL;
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,7 +25,7 @@ export const useLogin = (username: string, password: string) => {
     const getData = async () => {
       console.log("called");
       // try catch finally
-      if (AUTH_URL && username && password) {
+      if (AUTH_URL && credentials) {
         try {
           setIsLoading(true);
           //   const config = {
@@ -32,7 +38,7 @@ export const useLogin = (username: string, password: string) => {
             // headers: {
             //   ...config.headers,
             // },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ credentials }),
           });
 
           const data = await response.json();

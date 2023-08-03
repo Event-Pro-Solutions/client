@@ -25,7 +25,7 @@ export default function CreateCustomerAccountForm() {
 
   async function createUser(userData: UserModel) {
     try {
-      const response = await fetch(`${AUTH_URL}/auth/signup`, {
+      const response = await fetch(`${AUTH_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Specify the content type as JSON
