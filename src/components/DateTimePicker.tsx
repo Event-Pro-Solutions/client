@@ -1,11 +1,16 @@
 import React, { useState, useRef, RefObject } from "react";
 
-function DateTimePicker() {
+interface DateTimePickerProps {
+  onDateTimeChange: (dateTimeValue: string) => void;
+}
+
+function DateTimePicker({ onDateTimeChange }: DateTimePickerProps) {
   const [dateTime, setDateTime] = useState("");
   const dateTimeInputRef: RefObject<HTMLInputElement> = useRef(null);
 
   const handleDateTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDateTime(event.target.value);
+    onDateTimeChange(event.target.value);
     if (dateTimeInputRef.current) {
       dateTimeInputRef.current.blur();
     }

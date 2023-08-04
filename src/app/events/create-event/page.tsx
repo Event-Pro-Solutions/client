@@ -24,6 +24,9 @@ function CreateEventForm() {
       currency: "USD",
     })
   );
+  const [selectedStartDateTime, setSelectedStartDateTime] = useState("");
+  const [selectedEndDateTime, setSelectedEndDateTime] = useState("");
+  const [selectedType, setSelectedType] = useState("");
 
   const formatNumber = (n: string) => {
     // format number 1000000 to 1,234,567
@@ -97,17 +100,34 @@ function CreateEventForm() {
     }
   }
 
+  const handleStartDateTimeChange = (dateTimeValue: string) => {
+    setSelectedStartDateTime(dateTimeValue);
+  };
+  const handleEndDateTimeChange = (dateTimeValue: string) => {
+    setSelectedEndDateTime(dateTimeValue);
+  };
+  const handleTypeChange = (typeValue: string) => {
+    setSelectedType(typeValue);
+  };
+
   const handleSubmit = async (event: any) => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault();
 
+    // console.log(selectedStartDateTime);
+
     // Get data from the form.
-    const data = {};
+    const data = {
+      eventName: event.target.eventName.value,
+      startDatetime: selectedStartDateTime,
+      endDatetime: selectedEndDateTime,
+      price: event.target.price.value,
+      eventType: selectedType,
+    };
 
-    // // Send the data to the server in JSON format.
-    // const JSONdata = JSON.stringify(data)
+    console.log(data);
 
-    router.push("/user/profile");
+    // router.push("/user/profile");
   };
 
   return (
@@ -164,7 +184,7 @@ function CreateEventForm() {
                   Start
                 </label>
 
-                <DateTimePicker />
+                <DateTimePicker onDateTimeChange={handleStartDateTimeChange} />
               </div>
 
               <div className="display: inline-block px-2 w-full sm:w-52 sm:ml-3">
@@ -174,7 +194,7 @@ function CreateEventForm() {
                 >
                   End
                 </label>
-                <DateTimePicker />
+                <DateTimePicker onDateTimeChange={handleEndDateTimeChange} />
               </div>
             </div>
 
@@ -208,7 +228,7 @@ function CreateEventForm() {
                 >
                   Event Type
                 </label>
-                <CategoryDropdown />
+                <CategoryDropdown onTypeChange={handleTypeChange} />
               </div>
               <div className="md:display: inline-block display: block pb-4 w-full">
                 <label

@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function CategoryDropdown() {
+interface CategoryDropdownProps {
+  onTypeChange: (typeValue: string) => void;
+}
+
+function CategoryDropdown({ onTypeChange }: CategoryDropdownProps) {
   const [menu, setMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const [type, setType] = useState<string>("None");
@@ -31,18 +35,22 @@ function CategoryDropdown() {
     console.log(event);
     if (event?.target.innerText == "None") {
       setType("None");
+      onTypeChange(event.target.value);
       showMenu();
     }
     if (event?.target.innerText == "Sports & Hobbies") {
       setType("Sports & Hobbies");
+      onTypeChange(event.target.value);
       showMenu();
     }
     if (event?.target.innerText == "Entertainment") {
       setType("Entertainment");
+      onTypeChange(event.target.value);
       showMenu();
     }
     if (event?.target.innerText == "Social Activities") {
       setType("Social Activities");
+      onTypeChange(event.target.value);
       showMenu();
     }
   };
