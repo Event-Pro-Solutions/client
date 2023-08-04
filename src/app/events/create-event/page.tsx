@@ -18,7 +18,12 @@ function CreateEventForm() {
   const router = useRouter();
   // Handles the submit event on form submit.
   const [virtual, setVirtual] = useState(true);
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(
+    (0.0).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    })
+  );
 
   const formatNumber = (n: string) => {
     // format number 1000000 to 1,234,567
@@ -137,6 +142,7 @@ function CreateEventForm() {
                 id="eventName"
                 name="eventName"
                 required
+                minLength={2}
               />
             </div>
 
@@ -149,8 +155,8 @@ function CreateEventForm() {
                 Date and Time
               </label>
             </div>
-            <div className="display: inline-block">
-              <div className="display: inline-block px-2 w-full sm:w-52">
+            <div className="display: inline-block ">
+              <div className="display: inline-block px-2 w-full sm:w-52 ">
                 <label
                   className="display: block text-dark text-sm font-bold mb-2  text-center"
                   htmlFor="startDateTime"
@@ -216,8 +222,8 @@ function CreateEventForm() {
                     onClick={() => displayText("yes")}
                     className={
                       virtual
-                        ? "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2   text-center bg-primary"
-                        : "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2   text-center"
+                        ? "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2   text-center bg-primary cursor-pointer"
+                        : "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2   text-center cursor-pointer"
                     }
                     placeholder="Virtual or In Person"
                     // type="text"
@@ -231,8 +237,8 @@ function CreateEventForm() {
                     onClick={() => displayText("no")}
                     className={
                       virtual
-                        ? "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2  md:ml-2 text-center "
-                        : "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2  text-center bg-primary"
+                        ? "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2  md:ml-2 text-center cursor-pointer "
+                        : "display: inline-block shadow appearance-none border rounded border-accent  w-1/3 mx-2  text-center bg-primary cursor-pointer"
                     }
                     placeholder="Virtual or In Person"
                     // type="text"
@@ -277,7 +283,6 @@ function CreateEventForm() {
                 className="shadow appearance-none border rounded border-accent w-full py-2 px-3 text-dark leading-tight focus:outline-secondary focus:shadow-outline placeholder-accent"
                 id="description"
                 name="description"
-                required
               />
             </div>
 
@@ -294,7 +299,6 @@ function CreateEventForm() {
                 type="text"
                 id="eventImage"
                 name="eventImage"
-                required
               />
             </div>
 

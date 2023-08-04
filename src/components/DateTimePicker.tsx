@@ -12,7 +12,8 @@ function DateTimePicker() {
       type="datetime-local"
       value={dateTime}
       onChange={handleDateTimeChange}
-      className="border mb-4 p-2 rounded focus:outline-none focus:ring focus:border-blue-300 w-full sm:w-52"
+      className="border mb-4 p-2 rounded focus:outline-none focus:ring focus:border-blue-300 w-full sm:w-52 "
+      required
     />
   );
 }
