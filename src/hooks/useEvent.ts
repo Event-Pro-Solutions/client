@@ -5,10 +5,8 @@ export interface EventModel {
   name: string;
   is_virtual: boolean;
   location: string;
-  startDate: string;
-  endDate: string;
-  startTime: string;
-  endTime: string;
+  startDatetime: string;
+  endDatetime: string;
   price: number;
   tags: string[];
   creatorId: string;
