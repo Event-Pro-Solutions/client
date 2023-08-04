@@ -14,9 +14,18 @@ import ticketLogoLight from "@/assets/images/ticketLogoLight.png";
 import DateTimePicker from "@/components/DateTimePicker";
 import CategoryDropdown from "@/components/CategoryDropdown";
 
+const getToday = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
 function CreateEventForm() {
-  const router = useRouter();
-  // Handles the submit event on form submit.
   const [virtual, setVirtual] = useState(true);
   const [price, setPrice] = useState(
     (0.0).toLocaleString("en-US", {
@@ -24,9 +33,12 @@ function CreateEventForm() {
       currency: "USD",
     })
   );
-  const [selectedStartDateTime, setSelectedStartDateTime] = useState("");
-  const [selectedEndDateTime, setSelectedEndDateTime] = useState("");
-  const [selectedType, setSelectedType] = useState("");
+  const [selectedStartDateTime, setSelectedStartDateTime] = useState(
+    getToday()
+  );
+  const [selectedEndDateTime, setSelectedEndDateTime] = useState(getToday());
+  const [selectedType, setSelectedType] = useState<string>("");
+  const [dateError, setDateError] = useState<boolean>(false);
 
   const formatNumber = (n: string) => {
     // format number 1000000 to 1,234,567
@@ -114,8 +126,6 @@ function CreateEventForm() {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault();
 
-    // console.log(selectedStartDateTime);
-
     // Get data from the form.
     const data = {
       eventName: event.target.eventName.value,
@@ -124,6 +134,17 @@ function CreateEventForm() {
       price: event.target.price.value,
       eventType: selectedType,
     };
+    const startDate = new Date(data.startDatetime);
+    const endDate = new Date(data.endDatetime);
+
+    // Check if endDatetime is before startDatetime
+    if (endDate < startDate) {
+      // Show an error message or take appropriate action
+      setDateError(true);
+      return;
+    } else {
+      setDateError(false);
+    }
 
     console.log(data);
 
@@ -174,6 +195,14 @@ function CreateEventForm() {
               >
                 Date and Time
               </label>
+              {dateError ? (
+                <div style={{ color: "red" }}>
+                  Selected end date and time must be after the start date and
+                  time.
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="display: inline-block ">
               <div className="display: inline-block px-2 w-full sm:w-52 ">
