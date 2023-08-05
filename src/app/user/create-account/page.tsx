@@ -97,6 +97,7 @@ export default function CreateCustomerAccountForm() {
                 id="name"
                 name="name"
                 required
+                minLength={2}
               />
             </div>
 
@@ -131,6 +132,7 @@ export default function CreateCustomerAccountForm() {
                 id="username"
                 name="username"
                 required
+                minLength={2}
               />
             </div>
 
@@ -148,6 +150,7 @@ export default function CreateCustomerAccountForm() {
                 id="password"
                 name="password"
                 required
+                minLength={6}
               />
             </div>
             <div className="flex items-center justify-between">
