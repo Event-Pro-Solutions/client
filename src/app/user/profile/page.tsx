@@ -11,6 +11,7 @@ import EventCard from '@/components/EventCard';
 import { extendedTheme } from '@/app/theme';
 
 function ProfilePage() {  
+  function EventDisplay =
   return (
     <>
     <div className="bg-gradient-to-b from-accent to-transparent">
