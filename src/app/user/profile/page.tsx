@@ -7,11 +7,14 @@
 // - Display EventCards for registered events
 import React from 'react'
 import Link from 'next/link'
-import EventCard from '@/components/EventCard';
+import EventCard, { EventCardsProps } from '@/components/EventCard';
 import { extendedTheme } from '@/app/theme';
+import { sportEvents } from '@/utils/data';
 
-function ProfilePage() {  
-  function EventDisplay =
+function ProfilePage() { 
+  const managedEventSize = sportEvents.length;
+  const registeredEventSize = 0;
+
   return (
     <>
     <div className="bg-gradient-to-b from-accent to-transparent">
@@ -25,10 +28,13 @@ function ProfilePage() {
         <div className="flex space-x-4">
           <h2 className="text-center text-2xl font-bold rounded-full py-2 px-4">Managed Events</h2>
         </div>
-        <div className="grid grid-cols-3 gap-4 divide-x-0">
-          <div className="text-center h-60">Event Card</div>
-          <div className="text-center h-60">Event Card</div>
-          <div className="text-center h-60">Event Card</div>
+        <div className="flex flex-wrap justify-center">
+          <div className="grid">
+          {managedEventSize > 0 ?
+            <EventCard events={sportEvents} /> :
+            <div> No Events </div>
+          }
+          </div>
         </div>
         <div className=""/>
       </div>
@@ -36,10 +42,10 @@ function ProfilePage() {
         <div className="flex space-x-4">
           <h2 className="text-center text-2xl font-bold rounded-full py-2 px-4">Registered Events</h2>
         </div>
-        <div className="grid grid-cols-3 gap-4 divide-x-0">
-          <div className="text-center">Event Card</div>
-          <div className="text-center">Event Card</div>
-          <div className="text-center">Event Card</div>
+        <div className="flex justify-center">
+          {registeredEventSize > 0 ? 
+            <EventCard events={sportEvents} /> :
+            <div className="text-2xl text-center"> No Registered Events </div>}
         </div>
       </div>
     </div>
