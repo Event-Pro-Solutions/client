@@ -16,6 +16,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import textLogoLight from "@/assets/images/textLogoLight.png";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Navigation = () => {
   const [profileMenu, setProfileMenu] = useState(false);
@@ -29,6 +30,7 @@ const Navigation = () => {
   const [user, setUser] = useState<string | null>(
     localStorage.getItem("userId")
   );
+  const router = useRouter();
 
   useEffect(() => {
     setMobileMenu(false);
@@ -39,6 +41,8 @@ const Navigation = () => {
   const signOut = () => {
     setUser(null);
     setProfileMenu(false);
+    localStorage.clear();
+    router.push("/");
   };
   const signIn = () => {
     setUser(localStorage.getItem("userId"));
