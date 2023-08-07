@@ -26,7 +26,9 @@ const Navigation = () => {
   const [eventMenu, setEventMenu] = useState(false);
   const eventMenuRef = useRef<HTMLDivElement>(null);
   // Placehoder for user
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState<string | null>(
+    localStorage.getItem("userId")
+  );
 
   useEffect(() => {
     setMobileMenu(false);
@@ -35,11 +37,11 @@ const Navigation = () => {
 
   // Temp functions
   const signOut = () => {
-    setUser(false);
+    setUser(null);
     setProfileMenu(false);
   };
   const signIn = () => {
-    setUser(true);
+    setUser(localStorage.getItem("userId"));
   };
   // End of temp functions
 

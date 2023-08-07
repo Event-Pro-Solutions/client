@@ -30,6 +30,9 @@ export default function Login() {
 
   useEffect(() => {
     setError(null);
+    if (localStorage.getItem("userId")) {
+      router.push("/user/profile");
+    }
   }, []);
 
   async function loginUser(credentials: CredentialModel) {
@@ -51,6 +54,7 @@ export default function Login() {
       console.log(data._id);
       if (data) {
         localStorage.setItem("userId", data._id);
+        window.location.reload();
         router.push("/user/profile");
       }
 
