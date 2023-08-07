@@ -51,7 +51,7 @@ export default function Login() {
       }
 
       const data = await response.json(); // Parse the JSON data from the response
-      console.log(data._id);
+
       if (data) {
         localStorage.setItem("userId", data._id);
         window.location.reload();
@@ -63,7 +63,6 @@ export default function Login() {
       // Handle any errors that occurred during the fetch request
       console.error((error as Error).message);
       setError((error as Error).message);
-      console.log((error as Error).message);
       throw error; // Rethrow the error to be handled by the caller
     }
   }
