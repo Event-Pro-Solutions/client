@@ -38,6 +38,7 @@ export default function CreateCustomerAccountForm() {
       }
 
       const data = await response.json(); // Parse the JSON data from the response
+
       console.log(data);
       return data;
     } catch (error) {

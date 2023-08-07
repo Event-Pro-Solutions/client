@@ -16,19 +16,23 @@ interface CredentialModel {
   username: string;
   password: string;
 }
+interface ErrorResponse {
+  message: string;
+}
 
 export default function Login() {
   const AUTH_URL = process.env.AUTH_API_URL;
-  console.log(AUTH_URL);
-  // const [credentials, setCredentials] = useState<CredentialModel>({
-  //   username: "",
-  //   password: "",
-  // });
+  const [error, setError] = useState<string | null>(null);
+
   const [data, setData] = useState<any>(null);
   const [submit, setSubmit] = useState<boolean>(false);
   const router = useRouter();
 
-  async function loginUser(credentials: object) {
+  useEffect(() => {
+    setError(null);
+  }, []);
+
+  async function loginUser(credentials: CredentialModel) {
     try {
       const response = await fetch(`${AUTH_URL}/login`, {
         method: "POST",
@@ -39,15 +43,23 @@ export default function Login() {
       });
 
       if (!response.ok) {
-        throw new Error("Login failed"); // Handle non-OK response status (e.g., 400, 500, etc.)
+        const errorResponse: ErrorResponse = await response.json();
+        throw new Error(errorResponse.message);
       }
 
       const data = await response.json(); // Parse the JSON data from the response
-      console.log(data);
+      console.log(data._id);
+      if (data) {
+        localStorage.setItem("userId", data._id);
+        router.push("/user/profile");
+      }
+
       return data;
     } catch (error) {
       // Handle any errors that occurred during the fetch request
-      console.error("Login failed:", error);
+      console.error((error as Error).message);
+      setError((error as Error).message);
+      console.log((error as Error).message);
       throw error; // Rethrow the error to be handled by the caller
     }
   }
@@ -122,6 +134,7 @@ export default function Login() {
                 required
               />
             </div>
+            {error ? <div style={{ color: "red" }}>{error}</div> : <></>}
             <div className="flex items-center justify-between">
               <button
                 className="bg-dark hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline m-auto"
