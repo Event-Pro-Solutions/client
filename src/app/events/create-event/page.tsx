@@ -16,15 +16,13 @@ import CategoryDropdown from "@/components/CategoryDropdown";
 import { useCreateEvent } from "@/hooks";
 
 interface EventModel {
-  name: string;
-  is_virtual: boolean;
-  location: string;
-  startDatetime: string;
-  endDatetime: string;
-  price: number;
-  tags: string[] | null;
-  creatorId: string;
-  managedBy: string;
+  name: string | any;
+  is_virtual: boolean | any;
+  location: string | any;
+  startDatetime: string | any;
+  endDatetime: string | any;
+  price: number | any;
+  tags: string | null;
   imgUrl: string | null;
   description: string | null;
 }
@@ -57,7 +55,7 @@ function CreateEventForm() {
   const [dateError, setDateError] = useState<boolean>(false);
 
   // API CONNECTION
-  async function createUser(eventData: EventModel) {
+  async function createEvent(eventData: EventModel) {
     try {
       const response = await fetch(`${EVENT_URL}/createEvent`, {
         method: "POST",
@@ -169,11 +167,16 @@ function CreateEventForm() {
 
     // Get data from the form.
     const data = {
-      eventName: event.target.eventName.value,
+      name: event.target.eventName.value,
       startDatetime: selectedStartDateTime,
       endDatetime: selectedEndDateTime,
       price: event.target.price.value,
       eventType: selectedType,
+      is_virtual: virtual,
+      tags: selectedType,
+      imgUrl: "",
+      description: "",
+      location: "",
     };
     const startDate = new Date(data.startDatetime);
     const endDate = new Date(data.endDatetime);
@@ -185,6 +188,7 @@ function CreateEventForm() {
       return;
     } else {
       setDateError(false);
+      createEvent(data);
     }
 
     console.log(data);
