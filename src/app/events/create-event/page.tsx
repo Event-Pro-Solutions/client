@@ -13,6 +13,21 @@ import Image from "next/image";
 import ticketLogoLight from "@/assets/images/ticketLogoLight.png";
 import DateTimePicker from "@/components/DateTimePicker";
 import CategoryDropdown from "@/components/CategoryDropdown";
+import { useCreateEvent } from "@/hooks";
+
+interface EventModel {
+  name: string;
+  is_virtual: boolean;
+  location: string;
+  startDatetime: string;
+  endDatetime: string;
+  price: number;
+  tags: string[] | null;
+  creatorId: string;
+  managedBy: string;
+  imgUrl: string | null;
+  description: string | null;
+}
 
 const getToday = () => {
   const now = new Date();
@@ -26,6 +41,7 @@ const getToday = () => {
 };
 
 function CreateEventForm() {
+  const EVENT_URL = process.env.EVENT_API_URL;
   const [virtual, setVirtual] = useState(true);
   const [price, setPrice] = useState(
     (0.0).toLocaleString("en-US", {
@@ -39,6 +55,31 @@ function CreateEventForm() {
   const [selectedEndDateTime, setSelectedEndDateTime] = useState(getToday());
   const [selectedType, setSelectedType] = useState<string>("");
   const [dateError, setDateError] = useState<boolean>(false);
+
+  // API CONNECTION
+  async function createUser(eventData: EventModel) {
+    try {
+      const response = await fetch(`${EVENT_URL}/createEvent`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Specify the content type as JSON
+        },
+        body: JSON.stringify(eventData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Login failed"); // Handle non-OK response status (e.g., 400, 500, etc.)
+      }
+
+      const data = await response.json(); // Parse the JSON data from the response
+      console.log(data);
+      return data;
+    } catch (error) {
+      // Handle any errors that occurred during the fetch request
+      console.error("Login failed:", error);
+      throw error; // Rethrow the error to be handled by the caller
+    }
+  }
 
   const formatNumber = (n: string) => {
     // format number 1000000 to 1,234,567
