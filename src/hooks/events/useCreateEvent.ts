@@ -27,16 +27,16 @@ export const useCreateEvent = (eventData: EventModel, user: any) => {
       if (EVENTS_URL && eventData) {
         try {
           setIsLoading(true);
-          const config = {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          };
+          // const config = {
+          //   headers: {
+          //     Authorization: `Bearer ${user.token}`,
+          //   },
+          // };
           const response = await fetch(`${EVENTS_URL}/createEvent`, {
             method: "POST",
-            headers: {
-              ...config.headers,
-            },
+            // headers: {
+            //   ...config.headers,
+            // },
             body: JSON.stringify(eventData),
           });
 
