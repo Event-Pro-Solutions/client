@@ -27,10 +27,10 @@ export default function Login() {
   const [data, setData] = useState<any>(null);
   const [submit, setSubmit] = useState<boolean>(false);
   const router = useRouter();
-
+  console.log(sessionStorage.getItem("userId"));
   useEffect(() => {
     setError(null);
-    if (localStorage.getItem("userId")) {
+    if (sessionStorage.getItem("userId")) {
       router.push("/user/profile");
     }
   }, []);
@@ -53,7 +53,9 @@ export default function Login() {
       const data = await response.json(); // Parse the JSON data from the response
 
       if (data) {
-        localStorage.setItem("userId", data._id);
+        sessionStorage.setItem("userId", data._id);
+
+        // localStorage.setItem("userId", data._id);
         window.location.reload();
         router.push("/user/profile");
       }

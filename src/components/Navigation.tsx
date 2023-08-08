@@ -27,9 +27,8 @@ const Navigation = () => {
   const [eventMenu, setEventMenu] = useState(false);
   const eventMenuRef = useRef<HTMLDivElement>(null);
   // Placehoder for user
-  const [user, setUser] = useState<string | null>(
-    localStorage.getItem("userId")
-  );
+  // const [user, setUser] = useState<any>(false);
+  const [user, setUser] = useState<any>(sessionStorage.getItem("userId"));
   const router = useRouter();
 
   useEffect(() => {
@@ -41,13 +40,13 @@ const Navigation = () => {
   const signOut = () => {
     setUser(null);
     setProfileMenu(false);
-    localStorage.clear();
+    sessionStorage.removeItem("userId");
     router.push("/");
   };
-  const signIn = () => {
-    setUser(localStorage.getItem("userId"));
-  };
-  // End of temp functions
+  // const signIn = () => {
+  //   setUser(Cookies.get("userId"));
+  // };
+  // // End of temp functions
 
   const showProfileMenu = () => {
     if (!profileMenu) {
@@ -256,7 +255,6 @@ const Navigation = () => {
                   <div className="flex space-x-4 hidden md:ml-6 md:block">
                     <a
                       href="/user/login"
-                      onClick={signIn}
                       className="border-2 border-transparent bg-primary text-white hover:border-2 hover:border-secondary hover:bg-dark rounded-md px-3 py-2 text-sm font-medium"
                       aria-current="page"
                     >
