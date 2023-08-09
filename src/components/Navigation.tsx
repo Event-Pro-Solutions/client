@@ -58,15 +58,16 @@ const Navigation = () => {
   // const [user, setUser] = useState<any>(false);
   const [user, setUser] = useState<User>(defaultUser);
   const router = useRouter();
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
       typeof sessionStorage !== "undefined"
     ) {
-      let currentUser = sessionStorage.getItem("user");
-      if (currentUser) {
-        setUser(JSON.parse(currentUser));
+      let activeToken = sessionStorage.getItem("token");
+      if (activeToken) {
+        setToken(JSON.parse(activeToken));
       }
     }
   }, []);
@@ -113,10 +114,10 @@ const Navigation = () => {
     // logoutUser();
     sessionStorage.removeItem("user");
     setUser(defaultUser);
-    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("token");
     setProfileMenu(false);
-    window.location.reload();
     router.push("/");
+    window.location.reload();
   };
 
   const showProfileMenu = () => {
@@ -300,7 +301,7 @@ const Navigation = () => {
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
               {/* <!-- Profile dropdown --> */}
               <div className="relative ml-3">
-                {user._id.length > 0 ? (
+                {token ? (
                   <div>
                     <button
                       onClick={showProfileMenu}

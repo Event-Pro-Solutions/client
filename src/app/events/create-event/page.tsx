@@ -47,12 +47,26 @@ function CreateEventForm() {
       currency: "USD",
     })
   );
+  const [token, setToken] = useState<string | null>(null);
   const [selectedStartDateTime, setSelectedStartDateTime] = useState(
     getToday()
   );
   const [selectedEndDateTime, setSelectedEndDateTime] = useState(getToday());
   const [selectedType, setSelectedType] = useState<string>("");
   const [dateError, setDateError] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      typeof sessionStorage !== "undefined" &&
+      typeof sessionStorage.getItem("user") !== null
+    ) {
+      let activeToken = sessionStorage.getItem("token");
+      if (activeToken) {
+        setToken(JSON.parse(activeToken));
+      }
+    }
+  }, []);
 
   // API CONNECTION
   async function createEvent(eventData: EventModel) {
@@ -61,6 +75,7 @@ function CreateEventForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Specify the content type as JSON
+          Authorization: `Bearer ${token}`,
         },
         credentials: "include",
         body: JSON.stringify(eventData),

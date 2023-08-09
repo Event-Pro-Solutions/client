@@ -10,6 +10,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useThemeContext } from "@/contexts/theme";
+import { useUser } from "@/hooks";
+import { stringify } from "querystring";
 
 interface User {
   email: string;
@@ -34,17 +36,25 @@ const defaultUser = {
 };
 
 function ProfilePage() {
+  const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User>(defaultUser);
-
+  // const [user, setUser] = useState<User>(defaultUser);
+  // const {
+  //   data: user,
+  //   isError,
+  //   isLoading,
+  // } = useUser(JSON.stringify(sessionStorage.getItem("token")));
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
       typeof sessionStorage !== "undefined" &&
       typeof sessionStorage.getItem("user") !== null
     ) {
-      let currentUser = sessionStorage.getItem("user");
-      if (currentUser) {
-        setUser(JSON.parse(currentUser));
+      let activeToken = sessionStorage.getItem("token");
+      let activeUser = sessionStorage.getItem("user");
+      if (activeToken && activeUser) {
+        setToken(JSON.stringify(activeToken));
+        setUser(JSON.parse(activeUser));
       }
     }
   }, []);

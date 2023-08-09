@@ -48,7 +48,7 @@ export default function Login() {
   const AUTH_URL = process.env.AUTH_API_URL;
   const [error, setError] = useState<string | null>(null);
 
-  const [user, setUser] = useState<User>(defaultUser);
+  // const [user, setUser] = useState<User>(defaultUser);
   const [submit, setSubmit] = useState<boolean>(false);
   const router = useRouter();
 
@@ -58,9 +58,9 @@ export default function Login() {
       typeof window !== "undefined" &&
       typeof sessionStorage !== "undefined"
     ) {
-      if (user._id.length > 0) {
-        router.push("/user/profile");
-      }
+      // if (user._id.length > 0) {
+      //   router.push("/user/profile");
+      // }
     }
   }, []);
 
@@ -87,10 +87,10 @@ export default function Login() {
       }
 
       const data = await response.json(); // Parse the JSON data from the response
-      console.log(data);
 
-      sessionStorage.setItem("user", JSON.stringify(data));
-      setUser(data);
+      sessionStorage.setItem("token", JSON.stringify(data.token));
+      sessionStorage.setItem("user", JSON.stringify(data.user));
+      // setUser(data);
       router.push("/user/profile");
 
       return data;
