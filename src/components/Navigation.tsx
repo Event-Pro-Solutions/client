@@ -16,6 +16,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import textLogoLight from "@/assets/images/textLogoLight.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Navigation = () => {
   const [profileMenu, setProfileMenu] = useState(false);
@@ -198,25 +199,19 @@ const Navigation = () => {
                     className="text-white mt-4 px-3 py-2 text-sm font-medium  border-b-4 border-transparent hover:border-secondary"
                     aria-current="page"
                   >
-                    Concerts
+                    Sports & Hobbies
                   </a>
                   <a
                     href="#"
                     className="text-white   mt-4 px-3 py-2 text-sm font-medium  border-b-4 border-transparent hover:border-secondary"
                   >
-                    Sports
+                    Entertainment
                   </a>
                   <a
                     href="#"
                     className="text-white   mt-4 px-3 py-2 text-sm font-medium  border-b-4 border-transparent hover:border-secondary"
                   >
-                    Family
-                  </a>
-                  <a
-                    href="#"
-                    className="text-white   mt-4 px-3 py-2 text-sm font-medium  border-b-4 border-transparent hover:border-secondary"
-                  >
-                    More
+                    Social Activities
                   </a>
                 </div>
               </div>
@@ -342,25 +337,19 @@ const Navigation = () => {
                 className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
                 aria-current="page"
               >
-                Concerts
+                Sports & Hobbies
               </a>
               <a
                 href="#"
                 className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
               >
-                Sports
+                Entertainment
               </a>
               <a
                 href="#"
                 className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
               >
-                Family
-              </a>
-              <a
-                href="#"
-                className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
-              >
-                More
+                Social Activities
               </a>
             </div>
           ) : (
@@ -446,19 +435,19 @@ const Navigation = () => {
                     className="text-white hover:bg-primary block rounded-md px-3 py-2 text-base font-medium"
                     aria-current="page"
                   >
-                    Concerts
+                    Sports & Hobbies
+                  </a>
+                  <a
+                    href="/events/Entertainment"
+                    className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
+                  >
+                    Entertainment
                   </a>
                   <a
                     href="#"
                     className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
                   >
-                    Sports
-                  </a>
-                  <a
-                    href="#"
-                    className="text-white hover:bg-primary  block rounded-md px-3 py-2 text-base font-medium"
-                  >
-                    Family
+                    Social Activities
                   </a>
                   <a
                     href="#"

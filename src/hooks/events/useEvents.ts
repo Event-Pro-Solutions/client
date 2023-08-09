@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // get all events
 export const useEvents = () => {
   const EVENTS_URL = process.env.EVENT_API_URL;
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
