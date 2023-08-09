@@ -17,8 +17,36 @@ import React, { useEffect, useState, useRef } from "react";
 import textLogoLight from "@/assets/images/textLogoLight.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useThemeContext } from "@/contexts/theme";
+
+interface User {
+  email: string;
+  managedEvents: string[];
+  name: string;
+  password: string;
+  registeredEvents: any;
+  username: string;
+  __v: number;
+  _id: string;
+}
+const defaultUser = {
+  email: "",
+  managedEvents: [""],
+  name: "",
+  password: "",
+  registeredEvents: [],
+  username: "",
+  __v: 0,
+  _id: "",
+};
+
+interface ErrorResponse {
+  message: string;
+}
 
 const Navigation = () => {
+  const AUTH_URL = process.env.AUTH_API_URL;
+  // const { user, setUser } = useThemeContext();
   const [profileMenu, setProfileMenu] = useState(false);
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -28,8 +56,52 @@ const Navigation = () => {
   const eventMenuRef = useRef<HTMLDivElement>(null);
   // Placehoder for user
   // const [user, setUser] = useState<any>(false);
-  const [user, setUser] = useState<any>(sessionStorage.getItem("userId"));
+  const [user, setUser] = useState<User>(defaultUser);
   const router = useRouter();
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      typeof sessionStorage !== "undefined"
+    ) {
+      let currentUser = sessionStorage.getItem("user");
+      if (currentUser) {
+        setUser(JSON.parse(currentUser));
+      }
+    }
+  }, []);
+
+  async function logoutUser() {
+    try {
+      const response = await fetch(`${AUTH_URL}/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Specify the content type as JSON
+        },
+
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        const errorResponse: ErrorResponse = await response.json();
+        throw new Error(errorResponse.message);
+      }
+
+      const data = await response.json(); // Parse the JSON data from the response
+
+      if (data) {
+        sessionStorage.removeItem("user");
+        setUser(defaultUser);
+      }
+
+      return data;
+    } catch (error) {
+      // Handle any errors that occurred during the fetch request
+      console.error((error as Error).message);
+      // setError((error as Error).message);
+      throw error; // Rethrow the error to be handled by the caller
+    }
+  }
 
   useEffect(() => {
     setMobileMenu(false);
@@ -38,15 +110,14 @@ const Navigation = () => {
 
   // Temp functions
   const signOut = () => {
-    setUser(null);
-    setProfileMenu(false);
+    // logoutUser();
+    sessionStorage.removeItem("user");
+    setUser(defaultUser);
     sessionStorage.removeItem("userId");
+    setProfileMenu(false);
+    window.location.reload();
     router.push("/");
   };
-  // const signIn = () => {
-  //   setUser(Cookies.get("userId"));
-  // };
-  // // End of temp functions
 
   const showProfileMenu = () => {
     if (!profileMenu) {
@@ -229,7 +300,7 @@ const Navigation = () => {
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
               {/* <!-- Profile dropdown --> */}
               <div className="relative ml-3">
-                {user ? (
+                {user._id.length > 0 ? (
                   <div>
                     <button
                       onClick={showProfileMenu}
@@ -269,6 +340,24 @@ const Navigation = () => {
                       className=" border-2 border-primary  text-white hover:border-secondary rounded-md px-3 py-2 text-sm font-medium "
                     >
                       Create Account
+                    </a>
+                    <a
+                      href="/events/create-event"
+                      className="block px-4 py-2 text-md text-white rounded-md hover:bg-dark"
+                      role="menuitem"
+                      tabIndex={-1}
+                      id="user-menu-item-0"
+                    >
+                      Create New Event
+                    </a>
+                    <a
+                      onClick={signOut}
+                      className="block px-4 py-2 text-dm text-white rounded-md hover:bg-dark"
+                      role="menuitem"
+                      tabIndex={-1}
+                      id="user-menu-item-2"
+                    >
+                      Sign out
                     </a>
                   </div>
                 )}
@@ -332,7 +421,7 @@ const Navigation = () => {
 
         {/* <!-- Mobile menu, show/hide based on menu state. --> */}
         <div className="md:hidden" id="mobile-menu" ref={mobileMenuRef}>
-          {user ? (
+          {user._id.length > 0 ? (
             <div
               ref={eventMenuRef}
               className={

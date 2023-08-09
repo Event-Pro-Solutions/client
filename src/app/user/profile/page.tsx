@@ -6,19 +6,71 @@
 // - Access to "CreateEventForm"
 // Customer -
 // - Display EventCards for registered events
-import React from 'react'
-import Link from 'next/link'
+"use client";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { useThemeContext } from "@/contexts/theme";
 
-function ProfilePage() {
-  return (
-    <>
-      <h1>ProfilePage</h1>
-
-      <h2>
-        <Link href="/">← Back to home</Link>
-      </h2>
-    </>
-  )
+interface User {
+  email: string;
+  managedEvents: string[];
+  name: string;
+  password: string;
+  registeredEvents: any;
+  username: string;
+  __v: number;
+  _id: string;
 }
 
-export default ProfilePage
+const defaultUser = {
+  email: "",
+  managedEvents: [""],
+  name: "",
+  password: "",
+  registeredEvents: [],
+  username: "",
+  __v: 0,
+  _id: "",
+};
+
+function ProfilePage() {
+  const [user, setUser] = useState<User>(defaultUser);
+
+  useEffect(() => {
+    if (
+      typeof window !== "undefined" &&
+      typeof sessionStorage !== "undefined" &&
+      typeof sessionStorage.getItem("user") !== null
+    ) {
+      let currentUser = sessionStorage.getItem("user");
+      if (currentUser) {
+        setUser(JSON.parse(currentUser));
+      }
+    }
+  }, []);
+  // const { user, setUser } = useThemeContext();
+  // console.log(user);
+  return (
+    <>
+      {user._id.length > 0 ? (
+        <>
+          <h1 className="pt-44">ProfilePage for {user.name}</h1>
+
+          <h2>
+            <Link href="/">← Back to home</Link>
+          </h2>
+        </>
+      ) : (
+        <>
+          <h1 className="pt-44">No one logged in</h1>
+
+          <h2>
+            <Link href="/">← Back to home</Link>
+          </h2>
+        </>
+      )}
+    </>
+  );
+}
+
+export default ProfilePage;
