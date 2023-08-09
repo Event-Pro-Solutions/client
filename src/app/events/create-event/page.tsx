@@ -175,9 +175,9 @@ function CreateEventForm() {
       eventType: selectedType,
       is_virtual: virtual,
       tags: selectedType,
-      imgUrl: "",
-      description: "",
-      location: "",
+      imgUrl: "sdfsdfs",
+      description: "sdfsdf",
+      location: "sdfsdf",
     };
     const startDate = new Date(data.startDatetime);
     const endDate = new Date(data.endDatetime);
