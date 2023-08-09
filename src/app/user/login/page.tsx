@@ -58,9 +58,10 @@ export default function Login() {
       typeof window !== "undefined" &&
       typeof sessionStorage !== "undefined"
     ) {
-      // if (user._id.length > 0) {
-      //   router.push("/user/profile");
-      // }
+      if (sessionStorage.getItem("token")) {
+        // window.location.reload();
+        router.push("/user/profile");
+      }
     }
   }, []);
 
@@ -91,6 +92,7 @@ export default function Login() {
       sessionStorage.setItem("token", JSON.stringify(data.token));
       sessionStorage.setItem("user", JSON.stringify(data.user));
       // setUser(data);
+      window.location.reload();
       router.push("/user/profile");
 
       return data;

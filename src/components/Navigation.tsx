@@ -116,8 +116,8 @@ const Navigation = () => {
     setUser(defaultUser);
     sessionStorage.removeItem("token");
     setProfileMenu(false);
-    router.push("/");
     window.location.reload();
+    router.push("/");
   };
 
   const showProfileMenu = () => {

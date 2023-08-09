@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useThemeContext } from "@/contexts/theme";
 import { useUser } from "@/hooks";
 import { stringify } from "querystring";
+import { useRouter } from "next/navigation";
 
 interface User {
   email: string;
@@ -38,6 +39,7 @@ const defaultUser = {
 function ProfilePage() {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User>(defaultUser);
+  const router = useRouter();
   // const [user, setUser] = useState<User>(defaultUser);
   // const {
   //   data: user,
@@ -55,6 +57,9 @@ function ProfilePage() {
       if (activeToken && activeUser) {
         setToken(JSON.stringify(activeToken));
         setUser(JSON.parse(activeUser));
+      }
+      if (!sessionStorage.getItem("token")) {
+        router.push("/");
       }
     }
   }, []);
