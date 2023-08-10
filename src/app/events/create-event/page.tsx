@@ -91,7 +91,6 @@ function CreateEventForm() {
           "Content-Type": "application/json", // Specify the content type as JSON
           Authorization: `Bearer ${token}`,
         },
-        credentials: "include",
         body: JSON.stringify(eventData),
       });
 

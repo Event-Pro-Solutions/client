@@ -79,8 +79,6 @@ const Navigation = () => {
         headers: {
           "Content-Type": "application/json", // Specify the content type as JSON
         },
-
-        credentials: "include",
       });
 
       if (!response.ok) {
