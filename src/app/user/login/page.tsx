@@ -92,8 +92,8 @@ export default function Login() {
       sessionStorage.setItem("token", JSON.stringify(data.token));
       sessionStorage.setItem("user", JSON.stringify(data.user));
 
-      // window.location.reload();
-      // router.push("/user/profile");
+      window.location.reload();
+      router.push("/user/profile");
 
       return data;
     } catch (error) {
