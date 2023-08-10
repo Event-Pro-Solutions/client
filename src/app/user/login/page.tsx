@@ -45,7 +45,7 @@ const defaultUser = {
 
 export default function Login() {
   // const { user, setUser } = useThemeContext();
-  const AUTH_URL = process.env.AUTH_API_URL;
+  const AUTH_URL = process.env.NEXT_PUBLIC_AUTH_API_URL;
   const [error, setError] = useState<string | null>(null);
 
   // const [user, setUser] = useState<User>(defaultUser);
