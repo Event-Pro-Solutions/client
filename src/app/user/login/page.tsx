@@ -5,13 +5,14 @@
 // - Welcome Modal on submission
 // - Redirect to Profile on completion
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
 import ticket from "@/assets/images/ticketLogoLight.png";
 import { useLogin } from "@/hooks";
 import { useThemeContext } from "@/contexts/theme";
+import { GlobalContext } from "@/contexts/globalContext";
 import { userAgent } from "next/server";
 
 interface CredentialModel {
@@ -45,10 +46,9 @@ const defaultUser = {
 
 export default function Login() {
   // const { user, setUser } = useThemeContext();
-  const AUTH_URL = process.env.NEXT_PUBLIC_AUTH_API_URL;
-  console.log(AUTH_URL);
-  const endPoint = "/login";
+  const AUTH_URL = process.env.NEXT_PUBLIC_API_URL;
   const [error, setError] = useState<string | null>(null);
+  const { setUser } = useContext(GlobalContext);
 
   // const [user, setUser] = useState<User>(defaultUser);
   const [submit, setSubmit] = useState<boolean>(false);
@@ -75,12 +75,11 @@ export default function Login() {
 
   async function loginUser(credentials: CredentialModel) {
     try {
-      const response = await fetch(`${AUTH_URL}${endPoint}`, {
+      const response = await fetch(`${AUTH_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json", // Specify the content type as JSON
         },
-        credentials: "include",
         body: JSON.stringify(credentials),
       });
 
@@ -93,8 +92,8 @@ export default function Login() {
 
       sessionStorage.setItem("token", JSON.stringify(data.token));
       sessionStorage.setItem("user", JSON.stringify(data.user));
+      setUser(data.user);
 
-      window.location.reload();
       router.push("/user/profile");
 
       return data;
@@ -110,6 +109,7 @@ export default function Login() {
   const handleSubmit = async (event: any) => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault();
+    console.log(event.target.username.value);
 
     // Get data from the form.
     let credentials = {

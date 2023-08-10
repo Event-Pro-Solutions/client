@@ -4,6 +4,7 @@ import { Inter, Tenali_Ramakrishna, Ubuntu_Condensed } from "next/font/google";
 import Navigation from "@/components/Navigation";
 
 import { ThemeContextProvider } from "@/contexts/theme";
+import { GlobalContextProvider } from "@/contexts/globalContext";
 
 const inter = Inter({
   weight: "700",
@@ -45,8 +46,10 @@ export default function RootLayout({
       </head>
       <body className={classNames}>
         <ThemeContextProvider>
-          {" "}
-          <Navigation /> {children}
+          <GlobalContextProvider>
+            {" "}
+            <Navigation /> {children}
+          </GlobalContextProvider>
         </ThemeContextProvider>
       </body>
     </html>

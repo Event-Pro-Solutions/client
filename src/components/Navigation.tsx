@@ -13,11 +13,12 @@
 // User Signed In:
 // *Starting with the assumption all users are organizers and can create events
 // - Profile, SignOut, CreateEvent
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import textLogoLight from "@/assets/images/textLogoLight.png";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useThemeContext } from "@/contexts/theme";
+import { GlobalContext } from "@/contexts/globalContext";
 
 interface User {
   email: string;
@@ -51,12 +52,13 @@ const Navigation = () => {
   const profileMenuRef = useRef<HTMLDivElement>(null);
   const [mobileMenu, setMobileMenu] = useState(false);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const { user, setUser } = useContext(GlobalContext);
 
   const [eventMenu, setEventMenu] = useState(false);
   const eventMenuRef = useRef<HTMLDivElement>(null);
   // Placehoder for user
   // const [user, setUser] = useState<any>(false);
-  const [user, setUser] = useState<User>(defaultUser);
+  // const [user, setUser] = useState<User>(defaultUser);
   const router = useRouter();
   const [token, setToken] = useState(null);
 
@@ -90,10 +92,10 @@ const Navigation = () => {
 
       const data = await response.json(); // Parse the JSON data from the response
 
-      if (data) {
-        sessionStorage.removeItem("user");
-        setUser(defaultUser);
-      }
+      // if (data) {
+      //   sessionStorage.removeItem("user");
+      //   setUser(defaultUser);
+      // }
 
       return data;
     } catch (error) {
@@ -113,10 +115,10 @@ const Navigation = () => {
   const signOut = () => {
     // logoutUser();
     sessionStorage.removeItem("user");
-    setUser(defaultUser);
+    // setUser(defaultUser);
     sessionStorage.removeItem("token");
     setProfileMenu(false);
-    window.location.reload();
+    setUser(null);
     router.push("/");
   };
 
@@ -295,7 +297,7 @@ const Navigation = () => {
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
               {/* <!-- Profile dropdown --> */}
               <div className="relative ml-3">
-                {token ? (
+                {user ? (
                   <div>
                     <button
                       onClick={showProfileMenu}
@@ -398,7 +400,7 @@ const Navigation = () => {
 
         {/* <!-- Mobile menu, show/hide based on menu state. --> */}
         <div className="md:hidden" id="mobile-menu" ref={mobileMenuRef}>
-          {user._id.length > 0 ? (
+          {user ? (
             <div
               ref={eventMenuRef}
               className={

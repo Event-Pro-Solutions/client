@@ -1,5 +1,5 @@
 // https://atakansava.medium.com/using-react-context-with-nextjs-288bde71f807
-
+"use client";
 import React, { useState } from "react";
 
 interface IGlobalContextProps {
@@ -20,12 +20,18 @@ export const GlobalContextProvider = (props: any) => {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
+  const handleUpdateUser = (user: any) => {
+    console.log("handleUpdateUser", user);
+
+    setCurrentUser(user);
+  };
+
   return (
     <GlobalContext.Provider
       value={{
         user: currentUser,
         loading: isLoading,
-        setUser: setCurrentUser,
+        setUser: handleUpdateUser,
         setLoading: setIsLoading,
       }}
     >
