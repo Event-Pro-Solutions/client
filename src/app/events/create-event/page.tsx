@@ -26,6 +26,16 @@ interface EventModel {
   imgUrl: string | null;
   description: string | null;
 }
+interface User {
+  email: string;
+  managedEvents: string[];
+  name: string;
+  password: string;
+  registeredEvents: any;
+  username: string;
+  __v: number;
+  _id: string;
+}
 
 const getToday = () => {
   const now = new Date();
@@ -48,6 +58,7 @@ function CreateEventForm() {
     })
   );
   const [token, setToken] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [selectedStartDateTime, setSelectedStartDateTime] = useState(
     getToday()
   );
@@ -62,8 +73,10 @@ function CreateEventForm() {
       typeof sessionStorage.getItem("user") !== null
     ) {
       let activeToken = sessionStorage.getItem("token");
-      if (activeToken) {
+      let activeUser = sessionStorage.getItem("user");
+      if (activeToken && activeUser) {
         setToken(JSON.parse(activeToken));
+        setUser(JSON.parse(activeUser));
       }
     }
   }, []);
@@ -135,7 +148,7 @@ function CreateEventForm() {
       right_side = right_side.substring(0, 2);
 
       // join number by "."
-      return "$" + left_side + "." + right_side;
+      return left_side + "." + right_side;
     } else {
       // no decimal entered
       // add commas to the number
@@ -143,9 +156,9 @@ function CreateEventForm() {
 
       const formattedValue = formatNumber(inputValue);
       if (formattedValue == "") {
-        return "$" + formattedValue + (blur === "blur" ? "0.00" : "");
+        return formattedValue + (blur === "blur" ? "0.00" : "");
       } else {
-        return "$" + formattedValue + (blur === "blur" ? ".00" : "");
+        return formattedValue + (blur === "blur" ? ".00" : "");
       }
     }
   };
@@ -183,6 +196,7 @@ function CreateEventForm() {
 
     // Get data from the form.
     const data = {
+      _id: user ? user._id : null,
       name: event.target.eventName.value,
       startDatetime: selectedStartDateTime,
       endDatetime: selectedEndDateTime,
@@ -302,10 +316,10 @@ function CreateEventForm() {
                   type="text"
                   name="price"
                   id="price"
-                  pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$"
+                  // pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?"
                   value={price}
-                  data-type="currency"
-                  placeholder="$0.00"
+                  // data-type="currency"
+                  placeholder="0.00"
                   onChange={handlePriceChange}
                   onBlur={handleBlur}
                   required
