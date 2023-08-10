@@ -247,7 +247,7 @@ const Navigation = () => {
                     </button>
                   </div>
                 ) : (
-                  <div className="flex space-x-4 hidden md:ml-6 md:block">
+                  <div className="flex space-x-4 md:ml-6 md:block">
                     <a
                       href="/user/login"
                       onClick={signIn}

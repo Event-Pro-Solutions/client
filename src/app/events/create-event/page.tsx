@@ -259,7 +259,7 @@ function CreateEventForm() {
                 </label>
                 <CategoryDropdown onTypeChange={handleTypeChange} />
               </div>
-              <div className="md:display: inline-block display: block pb-4 w-full">
+              <div className="md:display: inline-block pb-4 w-full">
                 <label
                   className="display: block text-dark text-sm font-bold mb-2 text-center "
                   htmlFor="virtual"
